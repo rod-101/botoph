@@ -13,7 +13,7 @@
         $email = $_POST['email'];
         $password = $_POST['pass'];
 
-        $sql = "SELECT id, email, password_hash, role FROM users WHERE email = ?";
+        $sql = "SELECT user_id, email, password_hash, role FROM users WHERE email = ?";
         
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $email);            

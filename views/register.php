@@ -27,7 +27,7 @@
             }
             $stmt->close();
 
-            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password_hash, birth_date, region, province) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password_hash, birthdate, region, province) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             if($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("ssssssss", $fname, $mname, $lname, $email, $hashedPassword, $birth, $region, $province);            
                 $stmt->execute();
