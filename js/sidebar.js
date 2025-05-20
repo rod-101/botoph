@@ -1,3 +1,14 @@
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const toggleBtn = document.getElementById("toggleBtn");
+    sidebar.classList.toggle("closed");
+    toggleBtn.textContent = sidebar.classList.contains("closed") ? "☰" : "✕";
+}
+
+function logout() {
+    window.location.replace('http://localhost/BotoPH/views/login.php');
+}
+
 // sidebar.js
 export function loadSidebar(containerId) {
     const sidebarHTML = `
@@ -5,11 +16,11 @@ export function loadSidebar(containerId) {
             <div class="sidebar-content">
                 <div class="sidebar-page-links">
                     <a href="#" class="page-link"><i class="fas fa-user"></i> Profile</a>
-                    <a href="#" class="page-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="adminDashboard.html" class="page-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </div><br>
                 <h3>User Management</h3>
                 <ul>
-                    <li><a href="voterList.php"><i class="fas fa-users"></i> Manage Voters</a></li>
+                    <li><a href="manageVoters.html"><i class="fas fa-users"></i> Manage Voters</a></li>
                     <li><a href="#"><i class="fas fa-user-shield"></i> Manage Moderators</a></li>
                 </ul><br>
                 <h3>Candidate Information</h3>
@@ -21,7 +32,9 @@ export function loadSidebar(containerId) {
             </div>
         </div>
 
-        <div class="toggle-btn" onclick="toggleSidebar()" id="toggleBtn">☰</div>
+        <div class="toggle-btn" id="toggleBtn">☰</div>
     `;
     document.getElementById(containerId).innerHTML = sidebarHTML;
+    document.getElementById('toggleBtn').addEventListener('click', toggleSidebar);
+    document.querySelector('#logoutBtn').addEventListener('click', logout);
 }

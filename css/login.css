@@ -1,9 +1,4 @@
 /* Login page */
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 .quote-section {
     background: linear-gradient(to bottom right, #000807, #0d1a1a);
     color: white;
