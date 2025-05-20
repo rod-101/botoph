@@ -16,23 +16,26 @@ export function loadSidebar(containerId) {
             <div class="sidebar-content">
                 <div id="adminProfImgContainer">
                     <img src="../assets/admin-profile.png" id="admin-profile">
-                    <div id="name">name</div>
+                    <div id="name">Name</div>
                     <div id="email">email</div>
-                </div>
+                </div><br>
 
                 <div class="sidebar-page-links">
                     <a href="adminDashboard.html" class="page-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </div><br>
+
                 <h3>User Management</h3>
                 <ul>
                     <li><a href="manageVoters.html"><i class="fas fa-users"></i> Manage Voters</a></li>
                     <li><a href="#"><i class="fas fa-user-shield"></i> Manage Moderators</a></li>
                 </ul><br>
+
                 <h3>Candidate Information</h3>
                 <ul>
                     <li><a href="#"><i class="fas fa-user-tie"></i> Manage Candidates</a></li>
                     <li><a href="#"><i class="fas fa-vote-yea"></i> Manage Elections</a></li>
                 </ul>
+                
                 <div><button id="logoutBtn">Logout</button></div>
             </div>
         </div>
