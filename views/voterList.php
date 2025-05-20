@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             <?php
-                $sql = "SELECT full_name, email, created_at FROM users WHERE role = 'voter'";
+                $sql = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, email, created_at FROM users WHERE role = 'voter'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
