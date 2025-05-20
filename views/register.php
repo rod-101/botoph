@@ -9,6 +9,7 @@
         $email = $_POST['email'];
         $password = $_POST['pass'];
         $birth = $_POST['birthdate'];
+        $sex = $_POST['sex'];
         $region = $_POST['region'];
         $province = $_POST['province'];
         // Hash the password securely
@@ -27,9 +28,9 @@
             }
             $stmt->close();
 
-            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password_hash, birthdate, region, province) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (first_name, middle_name, last_name, email, password_hash, birthdate, sex, region, province) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("ssssssss", $fname, $mname, $lname, $email, $hashedPassword, $birth, $region, $province);            
+                $stmt->bind_param("sssssssss", $fname, $mname, $lname, $email, $hashedPassword, $birth, $sex, $region, $province);            
                 $stmt->execute();
                 if($stmt->affected_rows > 0) {
                     $_SESSION['registration_success'] = true;
@@ -100,6 +101,15 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Birthdate</label>
                     <input type="date" name="birthdate" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+
+                <!-- Sex -->
+                <div>
+                    <label class="text-sm font-medium text-gray-700" for="sex">Sex</label>
+                    <select id=sex" name="sex" required class="mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                 </div>
 
                 <!-- Region -->
