@@ -21,6 +21,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Joined</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +62,11 @@
                         <td>${voter.full_name}</td>
                         <td>${voter.email}</td>
                         <td>${voter.joined}</td>
+                        <td>
+                            <button onclick="viewVoter()">View</button>
+                            <button onclick="suspendVoter()">Suspend</button>
+                            <button onclick="banVoter()">Ban</button>
+                        </td>
                     `;
                     tbody.appendChild(tr);
                     });
