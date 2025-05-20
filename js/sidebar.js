@@ -14,8 +14,13 @@ export function loadSidebar(containerId) {
     const sidebarHTML = `
         <div class="sidebar closed" id="sidebar">
             <div class="sidebar-content">
+                <div id="adminProfImgContainer">
+                    <img src="../assets/admin-profile.png" id="admin-profile">
+                    <div id="name">name</div>
+                    <div id="email">email</div>
+                </div>
+
                 <div class="sidebar-page-links">
-                    <a href="#" class="page-link"><i class="fas fa-user"></i> Profile</a>
                     <a href="adminDashboard.html" class="page-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </div><br>
                 <h3>User Management</h3>

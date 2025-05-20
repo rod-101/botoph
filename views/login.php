@@ -13,7 +13,7 @@
         $email = $_POST['email'];
         $password = $_POST['pass'];
 
-        $sql = "SELECT user_id, email, password_hash, role FROM users WHERE email = ?";
+        $sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, email, password_hash, role FROM users WHERE email = ?";
         
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $email);            
@@ -23,17 +23,26 @@
             // Check if the email exists in the database
             if ($stmt->num_rows > 0) {
                 // Bind the result variables
-                $stmt->bind_result($id, $db_email, $db_password, $role);
+                $stmt->bind_result($id, $full_name, $db_email, $db_password, $role);
                 
                 // Fetch the result
                 $stmt->fetch();
                 
                 // Verify the password (assuming the password is hashed in the database)
                 if (password_verify($password, $db_password)) {
-                    // Password is correct, start the session and redirect
+                    // Password is correct, set session variables
                     $_SESSION['id'] = $id;
                     $_SESSION['email'] = $db_email;
                     $_SESSION['role'] = $role;
+                    $_SESSION['fullname'] = $full_name;
+                    
+                    //set last_login to NOW()
+                    $update = "UPDATE users SET last_login = NOW() WHERE user_id = ?";
+                    $stmt = $conn->prepare($update);
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+
+                    //redirect accordingly
                     if($role == 'admin') {
                         header("Location: adminDashboard.html"); // Redirect to dashboard or home page
                     } else if($role == 'moderator') {
@@ -41,13 +50,6 @@
                     } else {
                         header("Location: voterDashboard.html"); // Redirect to dashboard or home page
                     }
-
-                    //set last_login
-                    $update = "UPDATE users SET last_login = NOW() WHERE id = ?";
-                    $stmt = $conn->prepare($update);
-                    $stmt->bind_param("i", $id);
-                    $stmt->execute();
-                    exit();
                 } else {
                     // Invalid password
                     echo "Invalid email or password.";
