@@ -2,7 +2,7 @@
 include '../backend/dbConnection.php';
 
 // Prepare the SQL query
-$sql = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, email, birthdate, sex, region, province, created_at FROM users WHERE role = 'voter'";
+$sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, email, birthdate, sex, region, province, created_at FROM users WHERE role = 'voter'";
 $result = $conn->query($sql);
 
 $response = [];
@@ -10,6 +10,7 @@ $response = [];
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $response[] = [
+            'id' => $row['user_id'],
             'full_name' => $row['full_name'],
             'email' => $row['email'],
             'sex' => $row['sex'],
