@@ -44,7 +44,7 @@
         <!-- fetch voters from get_voter_list api -->
         <script>
             let allVoters = [];
-            async function fetchVoters() {
+            async function updateTable() {
                 try {
                     const response = await fetch('../api/get_voter_list.php');
                     if (!response.ok) throw new Error('Network response was not ok');
@@ -85,7 +85,7 @@
                 }
             }
 
-            window.onload = fetchVoters;
+            window.onload = updateTable;
 
             function editVoter(index) {
                 let voter = allVoters[index];
