@@ -86,5 +86,39 @@
             window.onload = fetchVoters;
         </script>
 
+        <dialog id="editVoterDialog">
+        <form method="dialog" id="editVoterForm">
+            <h4>Edit Voter Info</h4>
+
+            <input type="hidden" id="editVoterId">
+
+            <label>Email:
+            <input type="email" id="editEmail" required>
+            </label><br><br>
+
+            <label>Sex:
+            <select id="editSex" required>
+                <option value="">Select...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            </label><br><br>
+
+            <label>Region:
+            <input type="text" id="editRegion" required>
+            </label><br><br>
+
+            <label>Province:
+            <input type="text" id="editProvince" required>
+            </label><br><br>
+
+            <menu>
+            <button type="submit">Save</button>
+            <button type="button" onclick="document.getElementById('editVoterDialog').close()">Cancel</button>
+            </menu>
+        </form>
+        </dialog>
+
     </body>
 </html>
