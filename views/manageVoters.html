@@ -35,6 +35,51 @@
             </table>
         </div>
 
+
+        <dialog id="editVoterDialog">
+            <form method="dialog" id="editVoterForm">
+                <h4>Edit Voter Info</h4>
+
+                <label for="editVoterId">ID: </label>
+                <input type="text" id="editVoterId" disabled>
+                <br><br>
+
+                <label for="editName">Name: </label>
+                <input type="text" id="editName" disabled>
+                <br><br>
+
+                <label>Email: </label>
+                <input type="email" id="editEmail" required>
+                <br><br>
+
+                <label for="editSex">Sex: </label>
+                <select id="editSex" required>
+                    <option value="">Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <br><br>
+
+                <label for="editAge">Age: </label>
+                <input type="text" id="editAge" disabled>
+                <br><br>
+
+                <label for="editRegion">Region: </label>
+                <input type="text" id="editRegion" required>
+                <br><br>
+
+                <label>Province: </label>
+                <input type="text" id="editProvince" required>
+                <br><br>
+
+                <menu>
+                    <button type="submit" onclick="saveEdit()">Save</button>
+                    <button type="button" onclick="document.getElementById('editVoterDialog').close()">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
+
         <!-- insert the sidebar module (still has state difference issue across pages) -->
         <script type="module">
             import { loadSidebar } from '../js/sidebar.js';
@@ -44,6 +89,8 @@
         <!-- fetch voters from get_voter_list api -->
         <script>
             let allVoters = [];
+            let editIndex = -1;
+
             async function updateTable() {
                 try {
                     const response = await fetch('../api/get_voter_list.php');
@@ -89,6 +136,8 @@
 
             function editVoter(index) {
                 let voter = allVoters[index];
+                console.log(voter)
+                editIndex = index;
 
                 document.getElementById('editVoterDialog').showModal();
                 document.getElementById('editVoterId').value = voter.id;
@@ -105,52 +154,32 @@
             }
 
             function saveEdit() {
-                
+                if(editIndex === -1){
+                    console.log("please choose a record to update.");
+                    return;
+                }
+                let voter = allVoters[editIndex];
+                voter.email = document.getElementById('editEmail').value;
+                voter.sex = document.getElementById('editSex').value;
+                voter.region = document.getElementById('editRegion').value;
+                voter.province = document.getElementById('editProvince').value;
+
+                fetch("../api/update_voter.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify(voter)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                editIndex = -1;
             }
         </script>
-
-        <dialog id="editVoterDialog">
-            <form method="dialog" id="editVoterForm">
-                <h4>Edit Voter Info</h4>
-
-                <label for="editVoterId">ID: </label>
-                <input type="text" id="editVoterId" disabled>
-                <br><br>
-
-                <label for="editName">Name: </label>
-                <input type="text" id="editName" disabled>
-                <br><br
-
-                <label>Email: </label>
-                <input type="email" id="editEmail" required>
-                <br><br>
-
-                <label for="editSex">Sex: </label>
-                <select id="editSex" required>
-                    <option value="">Select...</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <br><br>
-
-                <label for="editAge">Age: </label>
-                <input type="text" id="editAge">
-                <br><br>
-
-                <label for="editRegion">Region: </label>
-                <input type="text" id="editRegion" required>
-                <br><br>
-
-                <label>Province:
-                <input type="text" id="editProvince" required>
-                </label><br><br>
-
-                <menu>
-                <button type="submit" onclick="saveEdit()">Save</button>
-                <button type="button" onclick="document.getElementById('editVoterDialog').close()">Cancel</button>
-                </menu>
-            </form>
-        </dialog>
-
     </body>
 </html>
