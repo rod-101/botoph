@@ -25,6 +25,7 @@
                         <th>Region</th>
                         <th>Province</th>
                         <th>Joined</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -119,6 +120,7 @@
 
                     voters.forEach((voter, index) => {
                         const row = document.createElement('tr');
+                        const btnText = voter.status === 'active' ? 'Disable Account' : 'Enable Account';
                         row.innerHTML = `
                             <td>${index + 1}</td>
                             <td>${voter.full_name}</td>
@@ -128,9 +130,10 @@
                             <td>${voter.region}</td>
                             <td>${voter.province}</td>
                             <td>${voter.joined}</td>
+                            <td>${voter.status}</td>
                             <td> 
                                 <button onclick="editVoter(${index})">Edit</button>
-                                <button onclick="disableVoter(${index})">Disable Account</button>
+                                <button onclick="disableVoter(${index})">${btnText}</button>
                             </td>
                         `;
                         tbody.appendChild(row);
@@ -172,7 +175,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: json.stringify(voter)
+                    body: JSON.stringify(voter)
                 })
                 .then(response => response.json())
                 .then(data => {

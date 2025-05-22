@@ -6,7 +6,7 @@ if(isset($data['status'])) {
     $status = $conn->real_escape_string($data['status']);
     $id = $conn->real_escape_string($data['id']);
 
-    $sql = "UPDATE users SET status = $status WHERE user_id = $id";
+    $sql = "UPDATE users SET status = '$status' WHERE user_id = $id";
     if($conn->query($sql)) {
         echo json_encode(['success' => true, 'massage'=> "Updated voter's status"]);
     } else {

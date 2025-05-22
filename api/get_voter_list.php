@@ -2,7 +2,7 @@
 include '../backend/dbConnection.php';
 
 // Prepare the SQL query
-$sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, email, birthdate, sex, region, province, created_at FROM users WHERE role = 'voter'";
+$sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, status, email, birthdate, sex, region, province, created_at FROM users WHERE role = 'voter'";
 $result = $conn->query($sql);
 
 $response = [];
@@ -17,6 +17,7 @@ if ($result && $result->num_rows > 0) {
             'age' => date_diff(date_create($row['birthdate']), date_create('today'))->y,
             'region' => $row['region'],
             'province' => $row['province'],
+            'status' => $row['status'],
             'joined' => date("F j, Y", strtotime($row['created_at']))
         ];
     }
