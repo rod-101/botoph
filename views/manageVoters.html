@@ -153,6 +153,12 @@
             function disableVoter(index) {
                 if(index < 0) return;
                 let voter = allVoters[index];
+                if (voter.status == 'active') {
+                    voter.status = 'disabled';
+                } else {
+                    voter.status = 'active';
+                }
+
                 fetch("../api/disable_voter.php", {
                     method: 'POST',
                     headers: {
@@ -176,7 +182,7 @@
                     return;
                 }
                 let voter = allVoters[editIndex];
-
+                console.log(voter);
                 //update rightful properties of the voter
                 voter.email = document.getElementById('editEmail').value;
                 voter.sex = document.getElementById('editSex').value;
