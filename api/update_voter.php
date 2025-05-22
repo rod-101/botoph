@@ -18,9 +18,9 @@ if (
     $region = $conn->real_escape_string($data['region']);
     $province = $conn->real_escape_string($data['province']);
 
-    $sql = "UPDATE voters 
-            SET email = '$email', sex = '$sex', region = '$region', province = '$province' 
-            WHERE id = $id";
+    $sql = "UPDATE users 
+        SET email = '$email', sex = '$sex', region = '$region', province = '$province' 
+        WHERE user_id = $id";
     if ($conn->query($sql)) {
         echo json_encode(['success' => true]);
     } else {

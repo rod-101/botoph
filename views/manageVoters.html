@@ -159,6 +159,8 @@
                     return;
                 }
                 let voter = allVoters[editIndex];
+
+                //update rightful properties of the voter
                 voter.email = document.getElementById('editEmail').value;
                 voter.sex = document.getElementById('editSex').value;
                 voter.region = document.getElementById('editRegion').value;
@@ -173,6 +175,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    updateTable();
                     console.log('Success:', data);
                 })
                 .catch(error => {
