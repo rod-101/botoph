@@ -80,15 +80,6 @@
             </form>
         </dialog>
 
-        <dialog id="disableVoterDialog">
-            <form method="dialog">
-                <p>Are you sure you want to disable this user?</p>
-                <button onclick="disableVoter()">Yes</button>
-                <button>No</button>
-            </form>
-        </dialog>
-
-
         <!-- insert the sidebar module (still has state difference issue across pages) -->
         <script type="module">
             import { loadSidebar } from '../js/sidebar.js';
@@ -162,6 +153,8 @@
             }
 
             function disableVoter(index) {
+                if(!confirm("Are you sure you want to enable/disable this voter?")) return;
+
                 if(index < 0) return;
                 let voter = allVoters[index];
                 if (voter.status == 'active') {
