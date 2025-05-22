@@ -149,8 +149,11 @@
                 document.getElementById('editProvince').value = voter.province;
             }
 
-            function disableVoter(voter) {
-                //code here
+            function disableVoter(index) {
+                // if(index < 0) return;
+                // let voter = allVoters[index];
+
+
             }
 
             function saveEdit() {
@@ -166,7 +169,7 @@
                 voter.region = document.getElementById('editRegion').value;
                 voter.province = document.getElementById('editProvince').value;
 
-                fetch("../api/update_voter.php", {
+                fetch("../api/update_voter_info.php", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
