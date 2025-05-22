@@ -25,6 +25,7 @@
                         <th>Region</th>
                         <th>Province</th>
                         <th>Joined</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,47 +36,98 @@
             </table>
         </div>
 
+
+        <dialog id="editVoterDialog">
+            <form method="dialog" id="editVoterForm">
+                <h4>Edit Voter Info</h4>
+
+                <label for="editVoterId">ID: </label>
+                <input type="text" id="editVoterId" disabled>
+                <br><br>
+
+                <label for="editName">Name: </label>
+                <input type="text" id="editName" disabled>
+                <br><br>
+
+                <label>Email: </label>
+                <input type="email" id="editEmail" required>
+                <br><br>
+
+                <label for="editSex">Sex: </label>
+                <select id="editSex" required>
+                    <option value="">Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <br><br>
+
+                <label for="editAge">Age: </label>
+                <input type="text" id="editAge" disabled>
+                <br><br>
+
+                <label for="editRegion">Region: </label>
+                <input type="text" id="editRegion" required>
+                <br><br>
+
+                <label>Province: </label>
+                <input type="text" id="editProvince" required>
+                <br><br>
+
+                <menu>
+                    <button type="submit" onclick="saveEdit()">Save</button>
+                    <button type="button" onclick="document.getElementById('editVoterDialog').close()">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
+        <!-- insert the sidebar module (still has state difference issue across pages) -->
         <script type="module">
             import { loadSidebar } from '../js/sidebar.js';
             window.addEventListener('DOMContentLoaded', loadSidebar('sidebar-container'));
         </script>
 
+        <!-- fetch voters from get_voter_list api -->
         <script>
-            async function fetchVoters() {
+            let allVoters = [];
+            let editIndex = -1;
+
+            async function updateTable() {
                 try {
                     const response = await fetch('../api/get_voter_list.php');
                     if (!response.ok) throw new Error('Network response was not ok');
-
                     const voters = await response.json();
+                    allVoters = voters;
 
                     const tbody = document.querySelector('table tbody');
                     const noDataMessage = document.getElementById('noDataMessage');
 
                     if (voters.length === 0) {
-                    noDataMessage.style.display = 'block';
-                    return;
+                        noDataMessage.style.display = 'block';
+                        return;
                     }
 
                     noDataMessage.style.display = 'none';
                     tbody.innerHTML = '';
 
                     voters.forEach((voter, index) => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${voter.full_name}</td>
-                        <td>${voter.email}</td>
-                        <td>${voter.sex}</td>
-                        <td>${voter.age}</td>
-                        <td>${voter.region}</td>
-                        <td>${voter.province}</td>
-                        <td>${voter.joined}</td>
-                        <td>
-                            <button onclick="viewVoter()">Update</button>
-                            <button onclick="banVoter()">Disable Account</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
+                        const row = document.createElement('tr');
+                        const btnText = voter.status === 'active' ? 'Disable Account' : 'Enable Account';
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${voter.full_name}</td>
+                            <td>${voter.email}</td>
+                            <td>${voter.sex}</td>
+                            <td>${voter.age}</td>
+                            <td>${voter.region}</td>
+                            <td>${voter.province}</td>
+                            <td>${voter.joined}</td>
+                            <td>${voter.status}</td>
+                            <td> 
+                                <button onclick="editVoter(${index})">Edit</button>
+                                <button onclick="disableVoter(${index})">${btnText}</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
                     });
 
                 } catch (error) {
@@ -83,8 +135,81 @@
                 }
             }
 
-            window.onload = fetchVoters;
-        </script>
+            window.onload = updateTable;
 
+            function editVoter(index) {
+                let voter = allVoters[index];
+                console.log(voter)
+                editIndex = index;
+
+                document.getElementById('editVoterDialog').showModal();
+                document.getElementById('editVoterId').value = voter.id;
+                document.getElementById('editName').value = voter.full_name;
+                document.getElementById('editEmail').value = voter.email;
+                document.getElementById('editSex').value = voter.sex;
+                document.getElementById('editAge').value = voter.age;
+                document.getElementById('editRegion').value = voter.region;
+                document.getElementById('editProvince').value = voter.province;
+            }
+
+            function disableVoter(index) {
+                if(!confirm("Are you sure you want to enable/disable this voter?")) return;
+
+                if(index < 0) return;
+                let voter = allVoters[index];
+                if (voter.status == 'active') {
+                    voter.status = 'disabled';
+                } else {
+                    voter.status = 'active';
+                }
+
+                fetch("../api/disable_voter.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(voter)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateTable();
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.log('Error: ', error)
+                })
+            }
+
+            function saveEdit() {
+                if(editIndex === -1){
+                    console.log("please choose a record to update.");
+                    return;
+                }
+                let voter = allVoters[editIndex];
+                console.log(voter);
+                //update rightful properties of the voter
+                voter.email = document.getElementById('editEmail').value;
+                voter.sex = document.getElementById('editSex').value;
+                voter.region = document.getElementById('editRegion').value;
+                voter.province = document.getElementById('editProvince').value;
+
+                fetch("../api/update_voter_info.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify(voter)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateTable();
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                editIndex = -1;
+            }
+        </script>
     </body>
 </html>
