@@ -10,14 +10,26 @@ function logout() {
 }
 
 // sidebar.js
-export function loadSidebar(containerId) {
+export async function loadSidebar(containerId) {
+    let fullname = 'Unauthorized';
+    let email = 'unauthorized@access.com';
+
+    try {
+        const response = await fetch('../api/fetch_user_session.php');
+        const data = await response.json();
+        fullname = data.fullname;
+        email = data.email;
+    } catch (error) {
+        console.error('Failed to fetch session info:', error);
+    }
+
     const sidebarHTML = `
         <div class="sidebar closed" id="sidebar">
             <div class="sidebar-content">
                 <div id="adminProfImgContainer">
                     <img src="../assets/admin-profile.png" id="admin-profile">
-                    <div id="name">Name</div>
-                    <div id="email">email</div>
+                    <div id="name"><b>${fullname}</b></div>
+                    <div id="email"><i>${email}</i></div>
                 </div><br>
 
                 <div class="sidebar-page-links">
