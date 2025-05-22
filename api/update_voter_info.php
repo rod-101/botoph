@@ -22,7 +22,7 @@ if (
         SET email = '$email', sex = '$sex', region = '$region', province = '$province' 
         WHERE user_id = $id";
     if ($conn->query($sql)) {
-        echo json_encode(['success' => true]);
+        echo json_encode(['success' => true, 'message' => 'Voter Updated.']);
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'Update failed']);

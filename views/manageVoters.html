@@ -151,10 +151,23 @@
             }
 
             function disableVoter(index) {
-                // if(index < 0) return;
-                // let voter = allVoters[index];
-
-
+                if(index < 0) return;
+                let voter = allVoters[index];
+                fetch("../api/disable_voter.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: json.stringify(voter)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateTable();
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.log('Error: ', error)
+                })
             }
 
             function saveEdit() {
