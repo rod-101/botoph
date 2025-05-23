@@ -64,29 +64,40 @@ function deleteCandidate(id) {
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const candidate_id = editingId ?? Date.now();
-  const newCandidate = {
-    candidate_id,
-    first_name: form.fname.value,
-    last_name: form.lname.value,
-    position: form.position.value,
-    party: form.party.value,
-    platform: form.platform.value,
-  };
 
-  if (editingId) {
-    await fetch('../api/update_candidate.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newCandidate) //updating an existing candidate
-    })
-    // const index = candidates.findIndex(c => c.id == editingId);
+  const formData = new FormData();
+  const candidate_id = editingId ?? Date.now(); //check if editing or adding candidate
+
+    if (editingId) {
+        formData.append("candidate_id", candidate_id);
+        formData.append("fname", form.fname.value);
+        formData.append("lname", form.lname.value);
+        formData.append("position", form.position.value);
+        formData.append("party", form.party.value);
+        formData.append("platform", form.platform.value);
+
+        const photoFile = document.getElementById("photoUpload").files[0];
+        if (photoFile) {
+            formData.append("photoUpload", photoFile);
+        }
+
+        // Send form data to server
+        const response = await fetch("../api/update_candidate.php", {
+            method: "POST",
+            body: formData // must not set Content-Type manually
+        });
+
+        if (response.ok) {
+            await renderCandidates(); // refresh the list
+            closeModal(); // close the form
+        } else {
+            alert("Error saving candidate.");
+        }    // const index = candidates.findIndex(c => c.id == editingId);
     // candidates[index] = newCandidate;
-  } else {
-    candidates.push(newCandidate); //adding a new candidate
-  }
+    } else {
+        console.log('modify code to add new candidate');
+        // candidates.push(newCandidate);
+    }
 
   renderCandidates();
   closeModal();

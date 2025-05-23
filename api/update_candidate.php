@@ -1,17 +1,29 @@
 <?php
 include '../backend/dbConnection.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = $_POST; // FormData sends data here
 
-// Validate required fields
-if (
-    isset($data['candidate_id']) &&
-    isset($data['first_name']) &&
-    isset($data['last_name']) &&
-    isset($data['position']) &&
-    isset($data['party']) &&
-    isset($data['platform'])
-) {
+// Sanitize inputs
+$candidateId = $data['candidate_id'] ?? null;
+$firstName   = $data['fname'] ?? '';
+$lastName    = $data['lname'] ?? '';
+$position    = $data['position'] ?? '';
+$party       = $data['party'] ?? '';
+$platform    = $data['platform'] ?? '';
+
+$photoUrl = '';
+if (isset($_FILES['photoUpload']) && $_FILES['photoUpload']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = '../assets/candidates/';
+    $fileTmpPath = $_FILES['photoUpload']['tmp_name'];
+    $fileName = strtolower(str_replace(' ', '', $firstName . $lastName)) . '.jpg';
+    $destPath = $uploadDir . $fileName;
+
+    if (move_uploaded_file($fileTmpPath, $destPath)) {
+        $photoUrl = $destPath;
+    }
+}
+
+if ($candidateId && $firstName && $lastName && $position && $party && $platform) {
     $sql = "UPDATE candidates SET 
                 first_name = ?, 
                 last_name = ?, 
@@ -23,15 +35,7 @@ if (
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param(
-            "sssssi", 
-            $data['first_name'], 
-            $data['last_name'], 
-            $data['position'], 
-            $data['party'], 
-            $data['platform'], 
-            $data['candidate_id']
-        );
+        $stmt->bind_param("sssssi", $firstName, $lastName, $position, $party, $platform, $candidateId);
 
         if ($stmt->execute()) {
             echo json_encode(["success" => true, "message" => "Candidate updated successfully."]);
