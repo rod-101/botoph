@@ -24,33 +24,44 @@ if (isset($_FILES['photoUpload']) && $_FILES['photoUpload']['error'] === UPLOAD_
 }
 
 if ($candidateId && $firstName && $lastName && $position && $party && $platform) {
-    $sql = "UPDATE candidates SET 
-                first_name = ?, 
-                last_name = ?, 
-                position = ?, 
-                party = ?, 
-                platform = ?,
-                photo_url = ?
-            WHERE candidate_id = ?";
 
-    $stmt = $conn->prepare($sql);
+    // Determine SQL based on whether photoUrl is set
+    if (!empty($photoUrl)) {
+        $sql = "UPDATE candidates SET 
+                    first_name = ?, 
+                    last_name = ?, 
+                    position = ?, 
+                    party = ?, 
+                    platform = ?,
+                    photo_url = ?
+                WHERE candidate_id = ?";
 
-    if ($stmt) {
+        $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssssi", $firstName, $lastName, $position, $party, $platform, $photoUrl, $candidateId);
-
-        if ($stmt->execute()) {
-            echo json_encode(["success" => true, "message" => "Candidate updated successfully."]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Execution failed."]);
-        }
-
-        $stmt->close();
     } else {
-        echo json_encode(["success" => false, "message" => "Failed to prepare statement."]);
+        $sql = "UPDATE candidates SET 
+                    first_name = ?, 
+                    last_name = ?, 
+                    position = ?, 
+                    party = ?, 
+                    platform = ?
+                WHERE candidate_id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssi", $firstName, $lastName, $position, $party, $platform, $candidateId);
     }
+
+    if ($stmt && $stmt->execute()) {
+        echo json_encode(["success" => true, "message" => "Candidate updated successfully."]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Execution failed."]);
+    }
+
+    $stmt->close();
 } else {
     echo json_encode(["success" => false, "message" => "Missing required fields."]);
 }
 
 $conn->close();
+
 ?>

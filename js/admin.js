@@ -75,19 +75,19 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData();
   const candidate_id = editingId ?? Date.now(); //check if editing or adding candidate
 
+    formData.append("candidate_id", candidate_id);
+    formData.append("fname", form.fname.value);
+    formData.append("lname", form.lname.value);
+    formData.append("position", form.position.value);
+    formData.append("party", form.party.value);
+    formData.append("platform", form.platform.value);
+
+    const photoFile = document.getElementById("photoUpload").files[0];
+    if (photoFile) {
+        formData.append("photoUpload", photoFile);
+    }
+
     if (editingId) {
-        formData.append("candidate_id", candidate_id);
-        formData.append("fname", form.fname.value);
-        formData.append("lname", form.lname.value);
-        formData.append("position", form.position.value);
-        formData.append("party", form.party.value);
-        formData.append("platform", form.platform.value);
-
-        const photoFile = document.getElementById("photoUpload").files[0];
-        if (photoFile) {
-            formData.append("photoUpload", photoFile);
-        }
-
         // Send form data to server
         const response = await fetch("../api/update_candidate.php", {
             method: "POST",
@@ -98,11 +98,21 @@ form.addEventListener("submit", async (e) => {
             await renderCandidates(); // refresh the list
             closeModal(); // close the form
         } else {
-            alert("Error saving candidate.");
+            alert("Error updating candidate.");
         }    // const index = candidates.findIndex(c => c.id == editingId);
     // candidates[index] = newCandidate;
     } else {
-        console.log('modify code to add new candidate');
+        console.log(formData.fname + " " + formData.lname)
+        const response = await fetch('../api/add_candidate.php', {
+            method: 'POST',
+            body: formData
+        })
+        if(response.ok) {
+            await renderCandidates();
+            closeModal();
+        } else {
+            alert("Error adding candidate.");
+        }
         // candidates.push(newCandidate);
     }
 
