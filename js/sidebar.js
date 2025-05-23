@@ -27,7 +27,7 @@ export async function loadSidebar(containerId) {
         <div class="sidebar closed" id="sidebar">
             <div class="sidebar-content">
                 <div id="adminProfImgContainer">
-                    <img src="../assets/admin-profile.png" id="admin-profile">
+                    <img src="../assets/admin-profile-3.png" id="admin-profile">
                     <div id="name"><b>${fullname}</b></div>
                     <div id="email"><i>${email}</i></div>
                 </div><br>
