@@ -48,7 +48,7 @@
                     } else if($role == 'moderator') {
                         header("Location: moderatorDashboard.html"); // Redirect to dashboard or home page                        
                     } else {
-                        header("Location: voterDashboard.html"); // Redirect to dashboard or home page
+                        header("Location: landingPage.php"); // Redirect to dashboard or home page
                     }
                 } else {
                     // Invalid password
@@ -130,7 +130,7 @@
                         </form>
                         <div class="mt-3">
                             <a href="#" class="d-block small">Forgot password?</a>
-                            <p class="mt-2 mb-0">Don't have an account? <a href="views/register.php">Register here</a></p>
+                            <p class="mt-2 mb-0">Don't have an account? <a href="register.php">Register here</a></p>
                         </div>
                     </div>
                 </div>
