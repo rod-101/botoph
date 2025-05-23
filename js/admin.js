@@ -40,13 +40,14 @@ async function renderCandidates() {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
+            <img src="${c.photoUrl}">
             <h3>${c.fullname}</h3>
             <p><strong>Position:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>
             <p>${c.platform}</p>
             <div class="card-actions">
-            <button onclick="editCandidate(${c.id})">Edit</button>
-            <button onclick="deleteCandidate(${c.id})" style="background:#cc0000;">Delete</button>
+                <button onclick="editCandidate(${c.id})">Edit</button>
+                <button onclick="deleteCandidate(${c.id})" style="background:#cc0000;">Delete</button>
             </div>
         `;
         list.appendChild(card);
