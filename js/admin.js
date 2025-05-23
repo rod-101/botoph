@@ -40,7 +40,7 @@ async function renderCandidates() {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-            <img src="${c.photoUrl}">
+            <img src="${c.photoUrl}" class="card-img" alt="${c.fullname}">
             <h3>${c.fullname}</h3>
             <p><strong>Position:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>

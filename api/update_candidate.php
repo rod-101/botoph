@@ -29,13 +29,14 @@ if ($candidateId && $firstName && $lastName && $position && $party && $platform)
                 last_name = ?, 
                 position = ?, 
                 party = ?, 
-                platform = ? 
+                platform = ?,
+                photo_url = ?
             WHERE candidate_id = ?";
 
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param("sssssi", $firstName, $lastName, $position, $party, $platform, $candidateId);
+        $stmt->bind_param("ssssssi", $firstName, $lastName, $position, $party, $platform, $photoUrl, $candidateId);
 
         if ($stmt->execute()) {
             echo json_encode(["success" => true, "message" => "Candidate updated successfully."]);
