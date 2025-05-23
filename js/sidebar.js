@@ -44,7 +44,7 @@ export async function loadSidebar(containerId) {
 
                 <h3>Candidate Information</h3>
                 <ul>
-                    <li><a href="#"><i class="fas fa-user-tie"></i> Manage Candidates</a></li>
+                    <li><a href="manageCandidates.html"><i class="fas fa-users"></i> Manage Candidates</a></li>
                     <li><a href="#"><i class="fas fa-vote-yea"></i> Manage Elections</a></li>
                 </ul>
                 
