@@ -9,7 +9,6 @@ let editingId = null;
 let candidates = [];
 
 function openModal(editId = null) {
-    console.log(candidates);
   modal.classList.remove("hidden");
   if (editId !== null) {
     const cand = candidates.find(c => c.id == editId);
@@ -63,22 +62,30 @@ function deleteCandidate(id) {
   renderCandidates();
 }
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const id = editingId ?? Date.now();
+  const candidate_id = editingId ?? Date.now();
   const newCandidate = {
-    id,
-    name: form.name.value,
+    candidate_id,
+    first_name: form.fname.value,
+    last_name: form.lname.value,
     position: form.position.value,
     party: form.party.value,
     platform: form.platform.value,
   };
 
   if (editingId) {
-    const index = candidates.findIndex(c => c.id === editingId);
-    candidates[index] = newCandidate;
+    await fetch('../api/update_candidate.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCandidate) //updating an existing candidate
+    })
+    // const index = candidates.findIndex(c => c.id == editingId);
+    // candidates[index] = newCandidate;
   } else {
-    candidates.push(newCandidate);
+    candidates.push(newCandidate); //adding a new candidate
   }
 
   renderCandidates();
