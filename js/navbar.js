@@ -1,5 +1,5 @@
-export async function navbar(body) {
-  body.innerHTML = `
+export async function navbar(container) {
+  container.innerHTML = `
     <nav class="flex flex-wrap items-center justify-between bg-white py-4 lg:px-12 shadow-sm border-b border-gray-200">
       <div class="flex justify-between items-center w-full px-6 lg:px-0 lg:w-auto border-b lg:border-none pb-5 lg:pb-0">
         <div class="flex items-center flex-shrink-0 text-gray-900">

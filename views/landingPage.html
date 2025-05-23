@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <script defer>
+        document.addEventListener('DOMContentLoaded', async () => {
+        const container = document.createElement('div');
+        container.className = 'p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
+
+        try {
+            console.log('here we are');
+            const response = await fetch('../api/get_candidates.php');
+            if (!response.ok) throw new Error('Failed to fetch candidates');
+
+            const candidates = await response.json();
+            
+            candidates.forEach(candidate => {
+                const card = document.createElement('a');
+                card.href = `candidate/${candidate.page_url}`;
+                card.className = 'bg-white rounded-2xl shadow hover:shadow-md transition p-4 cursor-pointer flex flex-col items-center text-center';
+                console.log(candidate.photoUrl)
+                console.log(candidate.pageUrl)
+                card.innerHTML = `
+                    <img src="${candidate.photo}" alt="${candidate.fullname}" class="w-24 h-24 rounded-full object-cover mb-4" />
+                    <h2 class="text-lg font-semibold">${candidate.fullname}</h2>
+                    <p class="text-gray-500">${candidate.position}</p>
+                    <p class="text-sm text-gray-600">${candidate.party}</p>
+                    <p class="text-sm text-gray-500">Age: ${candidate.age}</p>
+                `;
+
+                container.appendChild(card);
+            });
+        } catch (error) {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Failed to load candidates.';
+            errorMessage.className = 'text-red-600 text-center';
+            container.appendChild(errorMessage);
+        }
+
+        document.body.appendChild(container);
+        });
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home</title>
+</head>
+
+
+
+<body>
+    <div id="navbarContainer"></div>
+
+    <script type="module">
+        import { navbar } from '../js/navbar.js';
+        let navbarContainer = document.getElementById('navbarContainer');
+        navbar(navbarContainer);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- MDB -->
+    <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.0.0/mdb.umd.min.js">
+    </script>
+</body>
+</html>
