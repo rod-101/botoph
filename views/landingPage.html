@@ -10,7 +10,6 @@
         container.className = 'p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
 
         try {
-            console.log('here we are');
             const response = await fetch('../api/get_candidates.php');
             if (!response.ok) throw new Error('Failed to fetch candidates');
 
@@ -27,7 +26,7 @@
                     <h2 class="text-lg font-semibold">${candidate.fullname}</h2>
                     <p class="text-gray-500">${candidate.position}</p>
                     <p class="text-sm text-gray-600">${candidate.party}</p>
-                    <p class="text-sm text-gray-500">Age: ${candidate.age}</p>
+                    <p class="text-sm text-gray-500">Age: ${candidate.platform}</p>
                 `;
 
                 container.appendChild(card);

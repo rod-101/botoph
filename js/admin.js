@@ -9,11 +9,13 @@ let editingId = null;
 let candidates = [];
 
 function openModal(editId = null) {
+    console.log(candidates);
   modal.classList.remove("hidden");
   if (editId !== null) {
-    const cand = candidates.find(c => c.id === editId);
+    const cand = candidates.find(c => c.id == editId);
     document.getElementById("candidateId").value = cand.id;
-    document.getElementById("name").value = cand.name;
+    document.getElementById("fname").value = cand.firstName;
+    document.getElementById("lname").value = cand.lastName;
     document.getElementById("position").value = cand.position;
     document.getElementById("party").value = cand.party;
     document.getElementById("platform").value = cand.platform;
@@ -31,23 +33,25 @@ function closeModal() {
   editingId = null;
 }
 
-function renderCandidates() {
-  list.innerHTML = "";
-  candidates.forEach(c => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <h3>${c.name}</h3>
-      <p><strong>Position:</strong> ${c.position}</p>
-      <p><strong>Party:</strong> ${c.party}</p>
-      <p>${c.platform}</p>
-      <div class="card-actions">
-        <button onclick="editCandidate(${c.id})">Edit</button>
-        <button onclick="deleteCandidate(${c.id})" style="background:#cc0000;">Delete</button>
-      </div>
-    `;
-    list.appendChild(card);
-  });
+async function renderCandidates() {
+    let res = await fetch('../api/get_candidates.php');
+    candidates = await res.json();
+    list.innerHTML = "";
+    candidates.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <h3>${c.fullname}</h3>
+            <p><strong>Position:</strong> ${c.position}</p>
+            <p><strong>Party:</strong> ${c.party}</p>
+            <p>${c.platform}</p>
+            <div class="card-actions">
+            <button onclick="editCandidate(${c.id})">Edit</button>
+            <button onclick="deleteCandidate(${c.id})" style="background:#cc0000;">Delete</button>
+            </div>
+        `;
+        list.appendChild(card);
+    });
 }
 
 function editCandidate(id) {
@@ -84,9 +88,4 @@ form.addEventListener("submit", (e) => {
 addBtn.addEventListener("click", () => openModal());
 cancelBtn.addEventListener("click", closeModal);
 
-// Initial dummy data
-candidates = [
-  { id: 1, name: "Juan Dela Cruz", position: "President", party: "Partido Pilipino", platform: "Education reform, clean energy, peace & order." },
-  { id: 2, name: "Maria Santos", position: "Senator", party: "Bagong Bayan", platform: "Healthcare for all, job generation, digital transformation." }
-];
 renderCandidates();
