@@ -17,15 +17,15 @@
                 <h2 class="mb-0">Registered Voters</h2>
 
                 <div class="position-relative" style="max-width: 300px; width: 100%;">
-                <span class="position-absolute top-50 start-0 translate-middle-y ps-3">
-                    <img src="../assets/search.png" alt="Search" style="width: 23px; height: 23px;">
-                </span>
-                <input type="text" class="form-control ps-5" placeholder="Search..." style="border-radius: 50px;">
+                    <span class="position-absolute top-50 start-0 translate-middle-y ps-3">
+                        <img src="../assets/search.png" alt="Search" style="width: 23px; height: 23px;">
+                    </span>
+                    <input type="text" id="searchInput" class="form-control ps-5" placeholder="Search..." style="border-radius: 50px;">
+                </div>
             </div>
-        </div>
 
-            
-            <table class="table table-bordered table-striped">
+            <div id="noDataMessage">No data found</div>
+            <table id="userTable" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th>#</th>
@@ -41,7 +41,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <div id="noDataMessage">No data</div>
                     <!-- get_voter_list api goes here -->
                 </tbody>
             </table>
@@ -147,6 +146,26 @@
             }
 
             window.onload = updateTable;
+
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+                const filter = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#userTable tbody tr');
+                let visibleCount = 0;
+                
+                rows.forEach(row => {
+                    const rowText = row.textContent.toLowerCase();
+                    const match = rowText.includes(filter);
+                    row.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
+                });
+
+                if(filter === '') {
+                    document.getElementById('noDataMessage').style.display = 'none';
+                } else {
+                    document.getElementById('noDataMessage').style.display = visibleCount === 0 ? 'block' : 'block';
+                    document.getElementById('noDataMessage').textContent = visibleCount === 0 ? 'No data' : `Showing ${visibleCount} results.`;
+                }
+            });
 
             function editVoter(index) {
                 let voter = allVoters[index];

@@ -20,35 +20,35 @@
     <div id="sidebar-container"></div>
     <h1>Admin Dashboard</h1>
 
-  <div class="dashboard">
-    <div class="card">
-      <h2>Total Users</h2>
-      <div class="count" id="total">0</div>
-    </div>
-    <div class="card">
-      <h2>Voters</h2>
-      <div class="count" id="voters">0</div>
-    </div>
-    <div class="card">
-      <h2>Moderators</h2>
-      <div class="count" id="moderators">0</div>
-    </div>
-    <div class="card">
-      <h2>Admins</h2>
-      <div class="count" id="admins">0</div>
-    </div>
-  </div>
+    <div class="dashboard">
+        <div class="card">
+            <h2>Total Users</h2>
+            <div class="count" id="total">0</div>
+        </div>
+        <div class="card">
+            <h2>Voters</h2>
+            <div class="count" id="voters">0</div>
+        </div>
+        <div class="card">
+            <h2>Moderators</h2>
+            <div class="count" id="moderators">0</div>
+        </div>
+        <div class="card">
+            <h2>Admins</h2>
+            <div class="count" id="admins">0</div>
+        </div>
+        </div>
 
-  <div class="analytics-card">
-    <h2>User Growth Over Time</h2>
-    <div class="chart-tabs">
-      <button class="chart-tab active" data-type="daily" id="dailyTab">Daily</button>
-      <button class="chart-tab" data-type="weekly" id="weeklyTab">Weekly</button>
+        <div class="analytics-card">
+        <h2>User Growth Over Time</h2>
+        <div class="chart-tabs">
+            <button class="chart-tab active" data-type="daily" id="dailyTab">Daily</button>
+            <button class="chart-tab" data-type="weekly" id="weeklyTab">Weekly</button>
+        </div>
+        <div class="chart-wrapper">
+            <canvas id="growthChart"></canvas>
+        </div>
     </div>
-    <div class="chart-wrapper">
-      <canvas id="growthChart"></canvas>
-    </div>
-  </div>
 
   <!-- Scripts at the bottom -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
