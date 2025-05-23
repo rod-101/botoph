@@ -47,7 +47,7 @@ async function renderCandidates() {
             <p>${c.platform}</p>
             <div class="card-actions">
                 <button onclick="editCandidate(${c.id})">Edit</button>
-                <button onclick="deleteCandidate(${c.id})" style="background:#cc0000;">Delete</button>
+                <button onclick="deleteCandidate(${c.id})" style="background:#dd0000;">Delete</button>
             </div>
         `;
         list.appendChild(card);
