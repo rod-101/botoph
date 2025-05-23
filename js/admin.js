@@ -59,8 +59,14 @@ function editCandidate(id) {
 }
 
 function deleteCandidate(id) {
-  candidates = candidates.filter(c => c.id !== id);
-  renderCandidates();
+    if(confirm("Deleted records are not stored. \nAre you sure you want to delete this candidate?")) {
+        fetch('../api/delete_candidate.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({id})
+        })
+        renderCandidates();
+    }
 }
 
 form.addEventListener("submit", async (e) => {
