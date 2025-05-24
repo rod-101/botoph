@@ -60,14 +60,14 @@ function editCandidate(id) {
   openModal(id);
 }
 
-async function deleteCandidate(id) {
+function deleteCandidate(id) {
     if(confirm("Deleted records are not stored. \nAre you sure you want to delete this candidate?")) {
-        await fetch('../api/delete_candidate.php', {
+        fetch('../api/delete_candidate.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id})
         })
-        await renderCandidates();
+        renderCandidates();
     }
 }
 
@@ -119,7 +119,7 @@ form.addEventListener("submit", async (e) => {
 
         if(response.ok) {
             console.log('response is ok.');
-            await renderCandidates();
+            renderCandidates();
             document.getElementById('photoUpload').value = '';
             closeModal();
         } else {
