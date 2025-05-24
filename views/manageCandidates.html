@@ -14,35 +14,42 @@
     <div id="sidebar-container"></div>
   <!-- Container Wrapper -->
 <div class="page-wrapper">
-  <header>
-    <h1>BotoPH | Manage Candidates</h1>
-    <button id="addBtn">+ Add Candidate</button>
-  </header>
+    <header>
+        <h1>BotoPH | Manage Candidates</h1>
+        <button id="addBtn">+ Add Candidate</button>
+    </header>
 
-  <main>
-    <section id="candidateList" class="card-container"></section>
-  </main>
+    <main>
+        <section id="candidateList" class="card-container"></section>
+    </main>
 
-  <!-- Modal Form -->
-  <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <h2 id="modalTitle">Add Candidate</h2>
-      <form id="candidateForm">
-        <input type="hidden" id="candidateId">
-        <input type="text" id="fname" placeholder="First Name" required />
-        <input type="text" id="lname" placeholder="Last Name" required />
-        <input type="text" id="position" placeholder="Position" required />
-        <input type="text" id="party" placeholder="Political Party" />
-        <textarea id="platform" placeholder="Platform/Agenda"></textarea>
-        <label for="photoUpload">Change photo</label>
-        <input type="file" id="photoUpload" accept=".jpg, .jpeg">
-        <div class="modal-actions">
-          <button type="submit">Save</button>
-          <button type="button" id="cancelBtn">Cancel</button>
+    <!-- Modal Form -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Add Candidate</h2>
+            <!-- <form action="../api/add_candidate.php" method="POST" enctype="multipart/form-data">
+                <input type="text" name="fname" placeholder="First Name" />
+                <input type="text" name="lname" placeholder="Last Name" />
+                <input type="text" name="position" placeholder="Position" />
+                <input type="file" name="photoUpload" />
+                <button type="submit">Submit</button>
+            </form> -->
+            <form method="POST" id="candidateForm" enctype="multipart/form-data">
+                <input type="hidden" id="candidateId">
+                <input type="text" id="fname" name="fname" placeholder="First Name" required />
+                <input type="text" id="lname" name="lname" placeholder="Last Name" required />
+                <input type="text" id="position" name="position" placeholder="Position" required />
+                <input type="text" id="party" name="party" placeholder="Political Party" />
+                <textarea id="platform" name="platform" placeholder="Platform/Agenda"></textarea>
+                <label for="photoUpload">Change photo</label>
+                <input type="file" id="photoUpload" name="photoUpload" accept=".jpg, .jpeg">
+                <div class="modal-actions">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </div>
 
     <script type="module">

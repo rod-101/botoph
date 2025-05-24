@@ -69,11 +69,13 @@ function deleteCandidate(id) {
     }
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+// modal.classList.remove('hidden')
 
-  const formData = new FormData();
-  const candidate_id = editingId ?? Date.now(); //check if editing or adding candidate
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const candidate_id = editingId ?? Date.now(); //check if editing or adding candidate
 
     formData.append("candidate_id", candidate_id);
     formData.append("fname", form.fname.value);
@@ -102,22 +104,25 @@ form.addEventListener("submit", async (e) => {
         }    // const index = candidates.findIndex(c => c.id == editingId);
     // candidates[index] = newCandidate;
     } else {
-        console.log(formData.fname + " " + formData.lname)
+        console.log("Sending form data...");
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
         const response = await fetch('../api/add_candidate.php', {
             method: 'POST',
             body: formData
         })
+        console.log(window.location.href)
+
         if(response.ok) {
-            await renderCandidates();
+            console.log('response is ok.');
+            renderCandidates();
             closeModal();
         } else {
             alert("Error adding candidate.");
         }
         // candidates.push(newCandidate);
     }
-
-  renderCandidates();
-  closeModal();
 });
 
 addBtn.addEventListener("click", () => openModal());
