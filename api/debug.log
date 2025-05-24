@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748085427351
-    [fname] => Bam
-    [lname] => Aquino
+    [candidate_id] => 1748085550517
+    [fname] => Kiko
+    [lname] => Pangilinan
     [position] => Senator 
-    [party] => Liberal Party
-    [platform] => Education reform. Youth empowerment. Affordable internet access. MSME support. Anti-corruption.
+    [party] => Liberal Party 
+    [platform] => Agricultural development. Food security. Farmer and fisherfolk welfare. Anti-corruption. Good governance
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => Bam-Aquino.jpg
-            [full_path] => Bam-Aquino.jpg
+            [name] => kiko.jpg
+            [full_path] => kiko.jpg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\phpD560.tmp
+            [tmp_name] => C:\xampp\tmp\phpB685.tmp
             [error] => 0
-            [size] => 73227
+            [size] => 100330
         )
 
 )

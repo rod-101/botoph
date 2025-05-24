@@ -44,7 +44,7 @@ async function renderCandidates() {
         card.innerHTML = `
             <img src="${c.photoUrl}?t=${Date.now()}" class="card-img" alt="${c.fullname}">
             <h3>${c.fullname}</h3>
-            <p><strong>Position:</strong> ${c.position}</p>
+            <p><strong>Running:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>
             <p>${c.platform}</p>
             <div class="card-actions">
