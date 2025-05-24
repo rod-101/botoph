@@ -1,54 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <script defer>
-        document.addEventListener('DOMContentLoaded', async () => {
-        const container = document.createElement('div');
-        container.className = 'p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
-
-        try {
-            const response = await fetch('../api/get_candidates.php');
-            if (!response.ok) throw new Error('Failed to fetch candidates');
-
-            const candidates = await response.json();
-            
-            candidates.forEach(candidate => {
-                const card = document.createElement('a');
-                card.href = `candidate/${candidate.page_url}`;
-                card.className = 'bg-white rounded-2xl shadow hover:shadow-md transition p-4 cursor-pointer flex flex-col items-center text-center';
-                console.log(candidate.photoUrl)
-                console.log(candidate.pageUrl)
-                card.innerHTML = `
-                    <img src="${candidate.photo}" alt="${candidate.fullname}" class="w-24 h-24 rounded-full object-cover mb-4" />
-                    <h2 class="text-lg font-semibold">${candidate.fullname}</h2>
-                    <p class="text-gray-500">${candidate.position}</p>
-                    <p class="text-sm text-gray-600">${candidate.party}</p>
-                    <p class="text-sm text-gray-500">Age: ${candidate.platform}</p>
-                `;
-
-                container.appendChild(card);
-            });
-        } catch (error) {
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = 'Failed to load candidates.';
-            errorMessage.className = 'text-red-600 text-center';
-            container.appendChild(errorMessage);
-        }
-
-        document.body.appendChild(container);
-        });
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Home</title>
 </head>
-
-
-
-<body>
+<body class="bg-gray-50 min-h-screen">
     <div id="navbarContainer"></div>
+
+    <div class="p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input id="nameFilter" type="text" placeholder="Search by name" class="border border-gray-300 rounded-md p-2 w-full" />
+
+            <select id="positionFilter" class="border border-gray-300 rounded-md p-2 w-full">
+                <option value="">Select Position</option>
+            </select>
+
+            <select id="partylistFilter" class="border border-gray-300 rounded-md p-2 w-full">
+                <option value="">Select Partylist</option>
+            </select>
+
+            <select id="platformFilter" class="border border-gray-300 rounded-md p-2 w-full">
+                <option value="">Select Platform</option>
+            </select>
+        </div>
+
+        <div id="candidateContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </div>
 
     <script type="module">
         import { navbar } from '../js/navbar.js';
@@ -56,11 +35,99 @@
         navbar(navbarContainer);
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- MDB -->
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/9.0.0/mdb.umd.min.js">
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const candidateContainer = document.getElementById('candidateContainer');
+            const nameFilter = document.getElementById('nameFilter');
+            const positionFilter = document.getElementById('positionFilter');
+            const partylistFilter = document.getElementById('partylistFilter');
+            const platformFilter = document.getElementById('platformFilter');
+
+            let candidates = [];
+            let positions = new Set();
+            let partylists = new Set();
+            let platforms = new Set();
+
+            const renderCandidates = () => {
+                const nameVal = nameFilter.value.toLowerCase();
+                const positionVal = positionFilter.value;
+                const partylistVal = partylistFilter.value;
+                const platformVal = platformFilter.value;
+
+                candidateContainer.innerHTML = '';
+
+                const filtered = candidates.filter(candidate => {
+                    const matchesName = candidate.fullname.toLowerCase().includes(nameVal);
+                    const matchesPosition = !positionVal || candidate.position === positionVal;
+                    const matchesPartylist = !partylistVal || candidate.party === partylistVal;
+                    const matchesPlatform = !platformVal || (candidate.platform || '').includes(platformVal);
+                    return matchesName && matchesPosition && matchesPartylist && matchesPlatform;
+                });
+
+                if (filtered.length === 0) {
+                    candidateContainer.innerHTML = '<p class="col-span-full text-center text-gray-500">No candidates found.</p>';
+                    return;
+                }
+
+                filtered.forEach(candidate => {
+                    const card = document.createElement('a');
+                    card.href = `candidate/${candidate.page_url}`;
+                    card.className = 'bg-white rounded-2xl shadow hover:shadow-md transition p-6 cursor-pointer flex flex-col items-center text-center';
+                    card.innerHTML = `
+                        <img src="${candidate.photo}" alt="${candidate.fullname}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" />
+                        <div class="space-y-1">
+                            <h2 class="text-xl font-bold text-gray-800">${candidate.fullname}</h2>
+                            <p class="text-gray-600 text-base font-medium">${candidate.position}</p>
+                            <p class="text-gray-500 text-sm italic">${candidate.party}</p>
+                            <p class="text-gray-700 text-sm"><span class="font-semibold">Platform:</span> ${candidate.platform}</p>
+                        </div>
+                    `;
+                    candidateContainer.appendChild(card);
+                });
+            };
+
+            try {
+                const response = await fetch('../api/get_candidates.php');
+                if (!response.ok) throw new Error('Failed to fetch candidates');
+
+                candidates = await response.json();
+                candidates.forEach(c => {
+                    positions.add(c.position);
+                    partylists.add(c.party);
+                    (c.platform || '').split(',').forEach(p => platforms.add(p.trim()));
+                });
+
+                [...positions].forEach(pos => {
+                    const option = document.createElement('option');
+                    option.value = pos;
+                    option.textContent = pos;
+                    positionFilter.appendChild(option);
+                });
+
+                [...partylists].forEach(pl => {
+                    const option = document.createElement('option');
+                    option.value = pl;
+                    option.textContent = pl;
+                    partylistFilter.appendChild(option);
+                });
+
+                [...platforms].forEach(pf => {
+                    const option = document.createElement('option');
+                    option.value = pf;
+                    option.textContent = pf;
+                    platformFilter.appendChild(option);
+                });
+
+                renderCandidates();
+            } catch (error) {
+                candidateContainer.innerHTML = '<p class="text-red-600 text-center col-span-full">Failed to load candidates.</p>';
+            }
+
+            nameFilter.addEventListener('input', renderCandidates);
+            positionFilter.addEventListener('change', renderCandidates);
+            partylistFilter.addEventListener('change', renderCandidates);
+            platformFilter.addEventListener('change', renderCandidates);
+        });
     </script>
 </body>
 </html>
