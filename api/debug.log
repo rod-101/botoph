@@ -1,22 +1,12 @@
 Array
 (
-    [candidate_id] => 1748070147154
-    [fname] => Risa
-    [lname] => Hontiveros
-    [position] => Senator
-    [party] => Akbayan
-    [platform] => Gender equality. Social protection laws.
+    [candidate_id] => 1748084005745
+    [fname] => Paolo Benigno "Bam"
+    [lname] =>  Aquino IV 
+    [position] => Senator 
+    [party] => KNP
+    [platform] => Education Reform. Youth Employment. Good Governance.
 )
 Array
 (
-    [photoUpload] => Array
-        (
-            [name] => risa.jpg
-            [full_path] => risa.jpg
-            [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\phpACF2.tmp
-            [error] => 0
-            [size] => 24728
-        )
-
 )

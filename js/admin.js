@@ -60,14 +60,14 @@ function editCandidate(id) {
   openModal(id);
 }
 
-function deleteCandidate(id) {
+async function deleteCandidate(id) {
     if(confirm("Deleted records are not stored. \nAre you sure you want to delete this candidate?")) {
-        fetch('../api/delete_candidate.php', {
+        await fetch('../api/delete_candidate.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id})
         })
-        renderCandidates();
+        await renderCandidates();
     }
 }
 
