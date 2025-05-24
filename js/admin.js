@@ -89,6 +89,7 @@ form.addEventListener("submit", async (e) => {
     const photoFile = document.getElementById("photoUpload").files[0];
     if (photoFile) {
         formData.append("photoUpload", photoFile);
+        document.getElementById('photoUpload').value = '';
     }
 
     if (editingId) {
@@ -100,7 +101,7 @@ form.addEventListener("submit", async (e) => {
 
         if (response.ok) {
             await renderCandidates(); // refresh the list
-            document.getElementById('photoUpload').value = '';
+           
             closeModal(); // close the form
         } else {
             alert("Error updating candidate.");
@@ -119,8 +120,8 @@ form.addEventListener("submit", async (e) => {
 
         if(response.ok) {
             console.log('response is ok.');
-            renderCandidates();
-            document.getElementById('photoUpload').value = '';
+            await renderCandidates();
+           
             closeModal();
         } else {
             alert("Error adding candidate.");

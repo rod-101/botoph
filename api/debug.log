@@ -1,12 +1,22 @@
 Array
 (
-    [candidate_id] => 1748084005745
-    [fname] => Paolo Benigno "Bam"
-    [lname] =>  Aquino IV 
+    [candidate_id] => 1748085427351
+    [fname] => Bam
+    [lname] => Aquino
     [position] => Senator 
-    [party] => KNP
-    [platform] => Education Reform. Youth Employment. Good Governance.
+    [party] => Liberal Party
+    [platform] => Education reform. Youth empowerment. Affordable internet access. MSME support. Anti-corruption.
 )
 Array
 (
+    [photoUpload] => Array
+        (
+            [name] => Bam-Aquino.jpg
+            [full_path] => Bam-Aquino.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD560.tmp
+            [error] => 0
+            [size] => 73227
+        )
+
 )
