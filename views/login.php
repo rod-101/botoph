@@ -48,7 +48,7 @@
                     } else if($role == 'moderator') {
                         header("Location: moderatorDashboard.html"); // Redirect to dashboard or home page                        
                     } else {
-                        header("Location: landingPage.php"); // Redirect to dashboard or home page
+                        header("Location: landingPage.html"); // Redirect to dashboard or home page
                     }
                 } else {
                     // Invalid password
