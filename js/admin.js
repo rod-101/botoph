@@ -39,8 +39,10 @@ async function renderCandidates() {
     candidates.forEach(c => {
         const card = document.createElement("div");
         card.className = "card";
+        console.log('photoUrl for ' + c.fullname + " is " + c.photoUrl);
+        console.log(window.location.href);
         card.innerHTML = `
-            <img src="${c.photoUrl}" class="card-img" alt="${c.fullname}">
+            <img src="${c.photoUrl}?t=${Date.now()}" class="card-img" alt="${c.fullname}">
             <h3>${c.fullname}</h3>
             <p><strong>Position:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>
@@ -98,6 +100,7 @@ form.addEventListener("submit", async (e) => {
 
         if (response.ok) {
             await renderCandidates(); // refresh the list
+            document.getElementById('photoUpload').value = '';
             closeModal(); // close the form
         } else {
             alert("Error updating candidate.");
@@ -117,6 +120,7 @@ form.addEventListener("submit", async (e) => {
         if(response.ok) {
             console.log('response is ok.');
             renderCandidates();
+            document.getElementById('photoUpload').value = '';
             closeModal();
         } else {
             alert("Error adding candidate.");

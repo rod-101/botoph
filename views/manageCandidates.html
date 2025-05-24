@@ -27,13 +27,6 @@
     <div id="modal" class="modal hidden">
         <div class="modal-content">
             <h2 id="modalTitle">Add Candidate</h2>
-            <!-- <form action="../api/add_candidate.php" method="POST" enctype="multipart/form-data">
-                <input type="text" name="fname" placeholder="First Name" />
-                <input type="text" name="lname" placeholder="Last Name" />
-                <input type="text" name="position" placeholder="Position" />
-                <input type="file" name="photoUpload" />
-                <button type="submit">Submit</button>
-            </form> -->
             <form method="POST" id="candidateForm" enctype="multipart/form-data">
                 <input type="hidden" id="candidateId">
                 <input type="text" id="fname" name="fname" placeholder="First Name" required />

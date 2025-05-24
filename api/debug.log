@@ -1,12 +1,22 @@
 Array
 (
-    [candidate_id] => 1748065318695
-    [fname] => Juan
-    [lname] => Hosefa
-    [position] => Governor
-    [party] => 
-    [platform] => 
+    [candidate_id] => 1748070147154
+    [fname] => Risa
+    [lname] => Hontiveros
+    [position] => Senator
+    [party] => Akbayan
+    [platform] => Gender equality. Social protection laws.
 )
 Array
 (
+    [photoUpload] => Array
+        (
+            [name] => risa.jpg
+            [full_path] => risa.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpACF2.tmp
+            [error] => 0
+            [size] => 24728
+        )
+
 )
