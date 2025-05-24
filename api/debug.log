@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748070147154
-    [fname] => Risa
-    [lname] => Hontiveros
+    [candidate_id] => 1748081671048
+    [fname] => Francis "Kiko"
+    [lname] => Pangilinan
     [position] => Senator
-    [party] => Akbayan
-    [platform] => Gender equality. Social protection laws.
+    [party] => Liberal Party of the Philippines 
+    [platform] => Agriculture & Food Security. Education & Digital Access. Social Justice & Governance.
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => risa.jpg
-            [full_path] => risa.jpg
+            [name] => kiko.jpg
+            [full_path] => kiko.jpg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\phpACF2.tmp
+            [tmp_name] => C:\xampp\tmp\php844E.tmp
             [error] => 0
-            [size] => 24728
+            [size] => 100330
         )
 
 )

@@ -39,13 +39,25 @@ export async function loadSidebar(containerId) {
                 <h3>User Management</h3>
                 <ul>
                     <li><a href="manageVoters.html"><i class="fas fa-users"></i> Manage Voters</a></li>
-                    <li><a class="isDisabled" title="Not finished."><i class="fas fa-user-shield"></i> Manage Moderators</a></li>
+                    <li><a class="isDisabled" style="
+                        pointer-events: none;
+                        color: gray;
+                        text-decoration: none;
+                        cursor: not-allowed;
+                        opacity: 0.6;                           
+                    "><i class="fas fa-user-shield"></i> Manage Moderators</a></li>
                 </ul><br>
 
                 <h3>Candidate Information</h3>
                 <ul>
                     <li><a href="manageCandidates.html"><i class="fas fa-users"></i> Manage Candidates</a></li>
-                    <li><a class="isDisabled" title="Not finished."><i class="fas fa-vote-yea"></i> Manage Elections</a></li>
+                    <li><a class="isDisabled" style="
+                        pointer-events: none;
+                        color: gray;
+                        text-decoration: none;
+                        cursor: not-allowed;
+                        opacity: 0.6;                           
+                    "><i class="fas fa-vote-yea"></i> Manage Elections</a></li>
                 </ul>
                 
                 <div><button id="logoutBtn">Logout</button></div>
