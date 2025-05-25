@@ -1,9 +1,19 @@
 <?php
 include '../backend/dbConnection.php';
 
-header('Content-Type: application/json; charset=utf-8'); // Set content type first
+// Define utf8ize to recursively fix encoding issues
+function utf8ize($mixed) {
+    if (is_array($mixed)) {
+        foreach ($mixed as $key => $value) {
+            $mixed[$key] = utf8ize($value);
+        }
+    } elseif (is_string($mixed)) {
+        return mb_convert_encoding($mixed, 'UTF-8', 'UTF-8, ISO-8859-1, Windows-1252');
+    }
+    return $mixed;
+}
 
-$sql = "SELECT candidate_id, first_name, last_name, CONCAT(first_name, ' ', last_name) AS fullname, position, party, platform, photo_url, page_url FROM candidates";
+$sql = "SELECT candidate_id, first_name, last_name, CONCAT(first_name, ' ', last_name) AS fullname, position, party, platform, photo_url, page_url FROM candidates;";
 $result = $conn->query($sql);
 
 $response = [];
@@ -22,9 +32,22 @@ if ($result && $result->num_rows > 0) {
             'pageUrl' => $row['page_url']
         ];
     }
+} else {
+    $response = [];
 }
 
 $conn->close();
 
-echo json_encode($response);
+// Sanitize data before encoding
+$response = utf8ize($response);
+
+header('Content-Type: application/json');
+
+$json = json_encode($response);
+if ($json === false) {
+    echo 'json_encode failed: ' . json_last_error_msg();
+} else {
+    echo $json;
+}
+
 exit();
