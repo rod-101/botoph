@@ -1,5 +1,5 @@
 <?php
-    include '../backend/dbConnection.php';
+    include 'backend/dbConnection.php';
     session_start();
 
     // use this key for auth 58a520c2f866ddbe25294f86ea9c90c5
@@ -50,7 +50,7 @@
                     } else if($role == 'moderator') {
                         header("Location: moderatorDashboard.html"); // Redirect to dashboard or home page                        
                     } else {
-                        header("Location: landingPage.html"); // Redirect to dashboard or home page
+                        header("Location: index.html"); // Redirect to dashboard or home page
                     }
                 } else {
                     // Invalid password

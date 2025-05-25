@@ -1,5 +1,5 @@
 <?php
-    include '../backend/dbConnection.php';
+    include 'backend/dbConnection.php';
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

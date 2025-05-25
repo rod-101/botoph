@@ -6,7 +6,7 @@ function toggleSidebar() {
 }
 
 function logout() {
-    window.location.replace('http://localhost/BotoPH/views/login.php');
+    window.location.replace('http://localhost/BotoPH/login.php');
 }
 
 // sidebar.js
