@@ -50,7 +50,7 @@
                     } else if($_SESSION['role'] == 'moderator') {
                         header("Location: views/moderatorDashboard.html");                     
                     } else {
-                        header("Location: index.html");
+                        header("Location: index.php");
                     }
                 } else {
                     // Invalid password
