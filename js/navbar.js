@@ -1,8 +1,8 @@
 export async function navbar(container) {
     let isLoggedIn = false;
 
-    try {
-        const response = await fetch('api/login_status.php', {
+    try { //navbar is fetched in index.html so it's 'api/login...' not './api/log..'
+        const response = await fetch('api/login_status.php', { 
             method: 'GET',
             credentials: 'include' // include PHP session cookie
         });
@@ -44,7 +44,6 @@ export async function navbar(container) {
         </nav>
     `;
 
-    // 🟡 Add logout listener AFTER DOM has been updated
     if (isLoggedIn) {
         const logoutBtn = container.querySelector('#logoutBtn');
         if (logoutBtn) {
