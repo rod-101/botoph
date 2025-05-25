@@ -45,12 +45,12 @@
                     $stmt->execute();
 
                     //redirect accordingly
-                    if($role == 'admin') {
-                        header("Location: views/adminDashboard.html"); // Redirect to dashboard or home page
-                    } else if($role == 'moderator') {
-                        header("Location: views/moderatorDashboard.html"); // Redirect to dashboard or home page                        
+                    if($_SESSION['role'] == 'admin') {
+                        header("Location: views/adminDashboard.html"); 
+                    } else if($_SESSION['role'] == 'moderator') {
+                        header("Location: views/moderatorDashboard.html");                     
                     } else {
-                        header("Location: index.html"); // Redirect to dashboard or home page
+                        header("Location: index.html");
                     }
                 } else {
                     // Invalid password
