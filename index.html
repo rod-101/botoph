@@ -129,5 +129,14 @@
             platformFilter.addEventListener('change', renderCandidates);
         });
     </script>
+    <script>
+        window.onpageshow = function (event) {
+            if (event.persisted || window.performance.navigation.type === 2) {
+                // forces reload if the page was loaded from bfcache
+                console.log('previous button is clicked!');
+                window.location.reload();
+            }
+        };
+    </script>
 </body>
 </html>
