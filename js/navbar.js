@@ -32,7 +32,7 @@ export async function navbar(container) {
                             </a>
                         `
                         : `
-                            <a href="signup.php" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
+                            <a href="register.php" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
                                 Signup
                             </a>
                             <a href="login.php" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap border border-gray-300 hover:border-gray-700">
@@ -44,6 +44,7 @@ export async function navbar(container) {
         </nav>
     `;
 
+   //check if user (voter) is logged in
     if (isLoggedIn) {
         const logoutBtn = container.querySelector('#logoutBtn');
         if (logoutBtn) {
