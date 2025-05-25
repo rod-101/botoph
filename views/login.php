@@ -2,6 +2,8 @@
     include '../backend/dbConnection.php';
     session_start();
 
+    // use this key for auth 58a520c2f866ddbe25294f86ea9c90c5
+
     $showModal = false;
 
     if (isset($_SESSION['registration_success']) && $_SESSION['registration_success'] === true) {
