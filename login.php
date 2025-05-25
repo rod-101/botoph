@@ -37,6 +37,7 @@
                     $_SESSION['email'] = $db_email;
                     $_SESSION['role'] = $role;
                     $_SESSION['fullname'] = $full_name;
+                    $_SESSION['isLoggedIn'] = true;
                     
                     //set last_login to NOW()
                     $update = "UPDATE users SET last_login = NOW() WHERE user_id = ?";
@@ -50,7 +51,7 @@
                     } else if($_SESSION['role'] == 'moderator') {
                         header("Location: views/moderatorDashboard.html");                     
                     } else {
-                        header("Location: index.php");
+                        header("Location: index.html");
                     }
                 } else {
                     // Invalid password
