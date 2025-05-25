@@ -40,9 +40,8 @@ async function renderCandidates() {
         const card = document.createElement("div");
         card.className = "card";
         console.log('photoUrl for ' + c.fullname + " is " + c.photoUrl);
-        console.log(window.location.href);
         card.innerHTML = `
-            <img src="${c.photoUrl}?t=${Date.now()}" class="card-img" alt="${c.fullname}">
+            <img src="../assets/candidates/${c.photoUrl}?t=${Date.now()}" class="card-img" alt="${c.fullname}">
             <h3>${c.fullname}</h3>
             <p><strong>Running:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>

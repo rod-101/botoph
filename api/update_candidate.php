@@ -19,7 +19,7 @@ if (isset($_FILES['photoUpload']) && $_FILES['photoUpload']['error'] === UPLOAD_
     $destPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($fileTmpPath, $destPath)) {
-        $photoUrl = $destPath;
+        $photoUrl = $fileName;
     }
 }
 

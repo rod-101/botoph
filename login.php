@@ -46,9 +46,9 @@
 
                     //redirect accordingly
                     if($role == 'admin') {
-                        header("Location: adminDashboard.html"); // Redirect to dashboard or home page
+                        header("Location: views/adminDashboard.html"); // Redirect to dashboard or home page
                     } else if($role == 'moderator') {
-                        header("Location: moderatorDashboard.html"); // Redirect to dashboard or home page                        
+                        header("Location: views/moderatorDashboard.html"); // Redirect to dashboard or home page                        
                     } else {
                         header("Location: index.html"); // Redirect to dashboard or home page
                     }
@@ -74,7 +74,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BotoPH Login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="css/login.css">
         <style>
             .modal {
                 display: none;
@@ -117,7 +117,7 @@
                 <div class="col-sm-5 d-flex align-items-center justify-content-center vh-100 bg-white">
                     <div class="login-card">
                         <div class="text-center mb-4">
-                            <img src="../assets/botoph-logo.png" alt="Logo" width="60">
+                            <img src="assets/botoph-logo.png" alt="Logo" width="60">
                             <h4 class="mt-2">BotoPH</h4>
                         </div>
                         <h5 class="mb-3">Log in</h5>

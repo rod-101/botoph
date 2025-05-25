@@ -30,7 +30,7 @@
     </div>
 
     <script type="module">
-        import { navbar } from '../js/navbar.js';
+        import { navbar } from 'js/navbar.js';
         let navbarContainer = document.getElementById('navbarContainer');
         navbar(navbarContainer);
     </script>
@@ -71,10 +71,10 @@
 
                 filtered.forEach(candidate => {
                     const card = document.createElement('a');
-                    card.href = `candidate/${candidate.page_url}`;
+                    card.href = `views/candidates/${candidate.page_url}`;
                     card.className = 'bg-white rounded-2xl shadow hover:shadow-md transition p-6 cursor-pointer flex flex-col items-center text-center';
                     card.innerHTML = `
-                        <img src="${candidate.photoUrl}" alt="${candidate.fullname}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" />
+                        <img src="assets/candidates/${candidate.photoUrl}" alt="${candidate.fullname}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" />
                         <div class="space-y-1">
                             <h2 class="text-xl font-bold text-gray-800">${candidate.fullname}</h2>
                             <p class="text-gray-600 text-base font-medium">${candidate.position}</p>
@@ -87,7 +87,7 @@
             };
 
             try {
-                const response = await fetch('../api/get_candidates.php');
+                const response = await fetch('api/get_candidates.php');
                 if (!response.ok) throw new Error('Failed to fetch candidates');
 
                 candidates = await response.json();
