@@ -1,0 +1,86 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candidate Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    .profile-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+    }
+    .profile-header h2 {
+      margin-top: 0;
+    }
+    .profile-section {
+      margin-top: 1.5rem;
+    }
+    .timestamp {
+      color: gray;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="profile-container" id="profile">
+  <p>Loading profile...</p>
+</div>
+
+<script>
+  // Get ID from URL
+  const params = new URLSearchParams(window.location.search);
+  const candidateId = params.get('id');
+
+  if (!candidateId) {
+    document.getElementById('profile').innerHTML = "<p>No candidate ID provided.</p>";
+  } else {
+    fetch(`../api/get_candidate_page.php?id=${candidateId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById('profile').innerHTML = `<p>${data.error}</p>`;
+        } else {
+          renderProfile(data);
+        }
+      })
+      .catch(err => {
+        document.getElementById('profile').innerHTML = "<p>Error fetching profile.</p>";
+        console.error(err);
+      });
+  }
+
+  function renderProfile(profile) {
+    const html = `
+      <div class="profile-header">
+        <h2>${profile.full_name}</h2>
+        <p><strong>Running for:</strong> ${profile.running_for}</p>
+        <p><strong>Party List:</strong> ${profile.party_list}</p>
+      </div>
+
+      <div class="profile-section">
+        ${profile.content}
+      </div>
+
+      <div class="timestamp">
+        Last updated: ${new Date(profile.updated_at).toLocaleString()}
+      </div>
+    `;
+    document.getElementById('profile').innerHTML = html;
+  }
+</script>
+
+</body>
+</html>

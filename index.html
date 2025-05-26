@@ -71,7 +71,7 @@
 
                 filtered.forEach(candidate => {
                     const card = document.createElement('a');
-                    card.href = `views/candidates/${candidate.page_url}`;
+                    card.href = `views/candidate.html?id=${candidate.id}`;
                     card.className = 'bg-white rounded-2xl shadow hover:shadow-md transition p-6 cursor-pointer flex flex-col items-center text-center';
                     card.innerHTML = `
                         <img src="assets/candidates/${candidate.photoUrl}" alt="${candidate.fullname}" class="w-32 h-32 rounded-full object-cover mb-4 shadow" />
