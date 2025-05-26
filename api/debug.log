@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748256854723
-    [fname] => Maria
-    [lname] => Ibarra
-    [position] => Treasurer
-    [party] => Partido Pilipinoooi
-    [platform] => wala
+    [candidate_id] => 1748292702691
+    [fname] => Erwin
+    [lname] => Tulfo
+    [position] => Senator
+    [party] => Lakas–Christian Muslim Democrats (Lakas–CMD)
+    [platform] => PhilHealth reforms. Anti-political dynasty. West Philippine Sea defense. Middle class support.
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => me.jpg
-            [full_path] => me.jpg
+            [name] => Erwin-Tulfo.jpg
+            [full_path] => Erwin-Tulfo.jpg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\php8A2D.tmp
+            [tmp_name] => C:\xampp\tmp\php8975.tmp
             [error] => 0
-            [size] => 32339
+            [size] => 300577
         )
 
 )

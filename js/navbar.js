@@ -18,7 +18,7 @@ export async function navbar(container) {
                 BotoPH | 2025
             </div>
             <div id="menu" class="flex space-x-6">
-                <a href="about.html" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
+                <a href="views/about.html" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
                     About Us
                 </a>
                 ${
