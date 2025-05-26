@@ -11,13 +11,13 @@
 
   <form id="profileForm" onsubmit="submitForm(event)">
     <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" name="fullName" placeholder="Juan Dela Cruz" required />
+    <input type="text" id="fullName" name="fullName" placeholder='Ana Theresia "Risa" Navarro Hontiveros–Baraquel' required />
 
-    <label for="runningFor">Running For</label>
-    <input type="text" id="runningFor" name="runningFor" placeholder="Position" required />
+    <label for="runningFor">Position</label>
+    <input type="text" id="runningFor" name="runningFor" placeholder="Presidential Candidate" required />
 
     <label for="partyList">Partylist</label>
-    <input type="text" id="partyList" name="partyList" placeholder="Partylist Name" required />
+    <input type="text" id="partyList" name="partyList" placeholder="Akbayan Partylist" required />
 
     <div class="toolbar" role="toolbar" aria-label="Formatting options">
       <button type="button" onclick="format('bold')"><b>B</b></button>
@@ -31,26 +31,7 @@
     </div>
 
     <div id="editor" contenteditable="true" aria-label="Rich text editor" spellcheck="true">
-      <h2>📜 Background</h2>
-      <p>Write background here...</p>
-
-      <h2>🎯 Platform</h2>
-      <ul>
-        <li>Education: Free college tuition</li>
-        <li>Healthcare: Universal access</li>
-      </ul>
-
-      <h2>📊 Track Record</h2>
-      <ul>
-        <li>✅ Passed: Anti-Corruption Bill</li>
-        <li>❌ Voted against: Internet Tax Bill</li>
-      </ul>
-
-      <h2>📚 References</h2>
-      <ul>
-        <li>COMELEC Profile [link]</li>
-        <li>Interview with XYZ [link]</li>
-      </ul>
+      <!-- get content column from db -->
     </div>
 
     <textarea name="content" id="contentField"></textarea>
@@ -59,6 +40,57 @@
   </form>
 
   <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const candidateId = urlParams.get('id');
+
+        if (!candidateId) {
+            alert("No candidate ID provided in the URL.");
+            return;
+        }
+
+        try {
+            let editor = document.getElementById("editor");
+            const response = await fetch(`../api/get_candidate_page.php?id=${candidateId}`);
+            const data = await response.json();
+
+            if (data.error || !data.content || data.content.trim() === "") {
+                editor.innerHTML = `
+                    <h2>📜 Background</h2>
+                    <p>Write background here...</p>
+
+                    <h2>🎯 Platform</h2>
+                    <ul>
+                        <li><b>Education:</b> Strengthens support for inclusive education and the implementation of free college tuition in state universities and colleges.</li>
+                        <li><b>Healthcare:</b> Advocates for universal access to healthcare and mental health services, and was instrumental in the passage of the Mental Health Act.</li>
+                    </ul>
+
+                    <h2>📊 Track Record</h2>
+                    <ul>
+                        <li>✅ Passed: Mental Health Act (RA 11036), Expanded Maternity Leave Law (RA 11210)</li>
+                        <li>❌ Voted against: Anti-Terrorism Act (RA 11479), citing human rights concerns</li>
+                    </ul>
+
+                    <h2>📚 References</h2>
+                    <ul>
+                        <li><a>COMELEC Profile</a></li>
+                        <li><a>Interview with Risa Hontiveros</a> – Rappler</li>
+                        <li><a>Senate Biography</a></li>
+                    </ul>
+                `.trim();
+            } else {
+                // Populate the form fields
+                document.getElementById("fullName").value = data.full_name || "";
+                document.getElementById("runningFor").value = data.running_for || "";
+                document.getElementById("partyList").value = data.party_list || "";
+                editor.innerHTML = data.content;
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            alert("Failed to load candidate profile.");
+        }
+    });
+
     function format(command, value = null) {
       if (command === 'formatBlock' && value === 'H2') {
         toggleHeading('H2');
