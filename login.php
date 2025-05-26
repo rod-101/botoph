@@ -133,7 +133,6 @@
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <div class="mt-3">
-                            <a href="#" class="d-block small">Forgot password?</a>
                             <p class="mt-2 mb-0">Don't have an account? <a href="register.php">Register here</a></p>
                         </div>
                     </div>

@@ -11,10 +11,18 @@ $joined = date("F j, Y", strtotime($_SESSION['joined']));
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Account</title>
-  <link rel="stylesheet" href="../css/account.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Account</title>
+    <link rel="stylesheet" href="../css/account.css" />
+    <script type="module">
+        import { loadSidebar } from '../js/sidebar.js';
+        import { authCheckOnPageRestore, checkSessionAndRedirect } from '../js/auth.js'
+
+        checkSessionAndRedirect();
+        authCheckOnPageRestore();
+        loadSidebar('sidebar-container');
+    </script>
 </head>
 <body>
 
@@ -51,7 +59,7 @@ $joined = date("F j, Y", strtotime($_SESSION['joined']));
                 });
 
                 const result = await response.json();
-console.log(result.success)
+                console.log(result.success)
                 if (result.success) {
                     // Redirect to login or home page
                     window.location.href = '../index.html';
