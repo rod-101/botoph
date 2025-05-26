@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748292702691
-    [fname] => Erwin
-    [lname] => Tulfo
+    [candidate_id] => 1748297634157
+    [fname] => Willie
+    [lname] => Revillame
     [position] => Senator
-    [party] => Lakas–Christian Muslim Democrats (Lakas–CMD)
-    [platform] => PhilHealth reforms. Anti-political dynasty. West Philippine Sea defense. Middle class support.
+    [party] => 
+    [platform] => 
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => Erwin-Tulfo.jpg
-            [full_path] => Erwin-Tulfo.jpg
+            [name] => dwar-abante-radyo-willie-revillame.jpg
+            [full_path] => dwar-abante-radyo-willie-revillame.jpg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\php8975.tmp
+            [tmp_name] => C:\xampp\tmp\phpC8EE.tmp
             [error] => 0
-            [size] => 300577
+            [size] => 192844
         )
 
 )

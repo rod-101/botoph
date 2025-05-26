@@ -8,8 +8,8 @@ $candidateId = $data['candidate_id'] ?? null;
 $firstName   = $data['fname'] ?? '';
 $lastName    = $data['lname'] ?? '';
 $position    = $data['position'] ?? '';
-$party       = $data['party'] ?? '';
-$platform    = $data['platform'] ?? '';
+$party       = $data['party'] ?? 'Independent';
+$platform    = $data['platform'] ?? 'No platform';
 
 $photoUrl = '';
 if (isset($_FILES['photoUpload']) && $_FILES['photoUpload']['error'] === UPLOAD_ERR_OK) {

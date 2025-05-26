@@ -120,7 +120,6 @@ form.addEventListener("submit", async (e) => {
             method: 'POST',
             body: formData
         })
-        console.log(window.location.href)
 
         if(response.ok) {
             console.log('response is ok.');

@@ -21,8 +21,8 @@ if(isset($_POST)) {
 $fname = trim($_POST['fname'] ?? '');
 $lname = trim($_POST['lname'] ?? '');
 $position = trim($_POST['position'] ?? '');
-$party = trim($_POST['party'] ?? '');
-$platform = trim($_POST['platform'] ?? '');
+$party = trim($_POST['party'] ?? '') ?: 'Independent';
+$platform = trim($_POST['platform'] ?? '') ?: 'No platform';
 $photoUrl = null;
 
 // Validate required fields
@@ -42,7 +42,7 @@ if (isset($_FILES['photoUpload']) && $_FILES['photoUpload']['error'] === UPLOAD_
     $destPath = $uploadDir . $fileName;
 
     if (move_uploaded_file($fileTmpPath, $destPath)) {
-        $photoUrl = $destPath;
+        $photoUrl = $fileName;
     } else {
         http_response_code(500);
         echo json_encode(["error" => "Failed to save uploaded file."]);

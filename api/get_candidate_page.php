@@ -17,7 +17,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
     http_response_code(404);
-    echo json_encode(['error' => 'Candidate profile not found.']);
+    echo json_encode(['error' => 'This candidate does not have a profile page.']);
     exit();
 }
 
