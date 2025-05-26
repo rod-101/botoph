@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | BotoPH.edu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --text-black: #111111;
+      --gray: #6b7280;
+      --border: #e5e7eb;
+      --accent: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-white);
+      color: var(--text-black);
+      line-height: 1.8;
+    }
+
+    header {
+      background-color: var(--accent);
+      color: white;
+      padding: 4rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #d1d5db;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    ul li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.2rem;
+      position: relative;
+      color: var(--gray);
+    }
+
+    ul li::before {
+      content: '•';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .feature-group ul li::before {
+      content: '—';
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: #f3f4f6;
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>About BotoPH.edu</h1>
+    <p>Empowering the Filipino vote through facts, not noise.</p>
+  </header>
+
+  <div class="container">
+    <section>
+      <p><strong>BotoPH.edu</strong> is a web-based platform aimed at empowering Filipino voters—especially the youth—with verified, non-partisan, and accessible information about upcoming elections, candidates, voting procedures, and voter rights.</p>
+    </section>
+
+    <section>
+      <h2>Rationale</h2>
+      <ul>
+        <li>Many Filipinos rely on social media for news, on which fake information pervades.</li>
+        <li>Youth voters make up over 50% of the population but remain uninformed or disengaged.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Project Goals</h2>
+      <ul>
+        <li>Combat election misinformation</li>
+        <li>Encourage informed voting</li>
+        <li>Increase youth participation</li>
+        <li>Simplify access to official information</li>
+      </ul>
+    </section>
+
+    <section class="feature-group">
+      <h2>Core Features</h2>
+      <ul>
+        <li><strong>Candidate Profiles:</strong>
+          <ul>
+            <li>Personal background, platform, political history</li>
+            <li>Linked to verified news (COMELEC, Rappler, etc.)</li>
+            <li>Searchable by name</li>
+          </ul>
+        </li>
+        <li><strong>Voter Registration Guide:</strong>
+          <ul>
+            <li>Step-by-step for first-time, transfer, correction</li>
+            <li>Requirements and deadlines</li>
+            <li>Link to COMELEC</li>
+          </ul>
+        </li>
+        <li><strong>Voter Rights:</strong>
+          <ul>
+            <li>Right to Vote (Suffrage)</li>
+            <li>Right to Be Informed</li>
+            <li>Right to Equal, Accessible Voting</li>
+            <li>Right to a Secret Ballot</li>
+            <li>Right to File Complaints</li>
+            <li>Right to Participate in Reform</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-group">
+      <h2>Advanced Features</h2>
+      <ul>
+        <li><strong>Fact Checking:</strong>
+          <ul>
+            <li>Paste a link or text to flag questionable content</li>
+            <li>Connects with VERA Files, Tsek.ph</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Admin Panel</h2>
+      <ul>
+        <li>Admins can post and manage candidate profiles in real time.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 BotoPH.edu. All rights reserved.
+  </footer>
+
+</body>
+</html>

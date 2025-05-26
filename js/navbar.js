@@ -18,13 +18,13 @@ export async function navbar(container) {
                 BotoPH | 2025
             </div>
             <div id="menu" class="flex space-x-6">
-                <a href="../README.md" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
+                <a href="about.html" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
                     About Us
                 </a>
                 ${
                     isLoggedIn
                         ? `
-                            <a href="account.html" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
+                            <a href="views/account.php" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap">
                                 Account
                             </a>
                             <a href="#" id="logoutBtn" class="text-gray-700 hover:text-gray-900 transition font-medium px-3 py-2 rounded-md whitespace-nowrap border border-gray-300 hover:border-gray-700">

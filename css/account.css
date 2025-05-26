@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f6f8fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.back-button {
+    display: inline-block;
+    position: fixed;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #c3d2e7;
+    color: #1a202c;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+.back-button:hover {
+    background-color: #cbd5e0;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+}
+
+.account-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.avatar-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+.user-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-role {
+    font-size: 0.95rem;
+    color: #777;
+}
+
+.info-section {
+    margin-top: 1rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.info-row {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn.primary {
+    background-color: #4f46e5;
+    color: #fff;
+}
+
+.btn.primary:hover {
+    background-color: #4338ca;
+}
+
+.btn.secondary {
+    background-color: #e2e8f0;
+    color: #333;
+}
+
+.btn.secondary:hover {
+    background-color: #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .account-card {
+        padding: 1.5rem;
+    }
+
+    .user-name {
+        font-size: 1.3rem;
+    }
+}

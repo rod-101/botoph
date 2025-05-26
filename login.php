@@ -15,7 +15,7 @@
         $email = $_POST['email'];
         $password = $_POST['pass'];
 
-        $sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, email, password_hash, role FROM users WHERE email = ?";
+        $sql = "SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name, email, password_hash, role, created_at FROM users WHERE email = ?";
         
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $email);            
@@ -25,7 +25,7 @@
             // Check if the email exists in the database
             if ($stmt->num_rows > 0) {
                 // Bind the result variables
-                $stmt->bind_result($id, $full_name, $db_email, $db_password, $role);
+                $stmt->bind_result($id, $full_name, $db_email, $db_password, $role, $created_at);
                 
                 // Fetch the result
                 $stmt->fetch();
@@ -37,6 +37,7 @@
                     $_SESSION['email'] = $db_email;
                     $_SESSION['role'] = $role;
                     $_SESSION['fullname'] = $full_name;
+                    $_SESSION['joined'] = $created_at;
                     $_SESSION['isLoggedIn'] = true;
                     
                     //set last_login to NOW()
