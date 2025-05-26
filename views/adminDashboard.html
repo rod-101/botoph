@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/adminDashboard.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
   <style>
+    
     body {
         padding: 2rem;
         background: #f2f2f2;
@@ -60,9 +61,36 @@
     </script>
 
     <script>
+        window.onpageshow = function (event) {
+            if (event.persisted) {
+                // console.log('event persisted or back button was clicked')
+                checkSessionAndRedirect();
+                // forces reload if the page was loaded from bfcache
+            }
+        };
+
+        // checkSessionAndRedirect();
+
+        async function checkSessionAndRedirect() {
+            try {
+                const response = await fetch('../api/fetch_user_session.php', { cache: 'no-store' });
+                const data = await response.json();
+                const isLoggedIn = data.isLoggedIn;
+                const role = data.role;
+                console.log(role + " " + isLoggedIn);
+
+                if (!isLoggedIn || role !== 'admin') {
+                    console.log("user is not authenticated.");
+                    window.location.href = '../login.php';
+                }
+            } catch (error) {
+                console.error('Failed to fetch session info:', error);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
         // Load user counts
-        fetch("http://localhost/botoph/api/get_user_counts.php")
+        fetch("../api/get_user_counts.php")
             .then(res => res.json())
             .then(data => {
             document.getElementById("total").textContent = data.total;

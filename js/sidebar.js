@@ -5,8 +5,21 @@ function toggleSidebar() {
     toggleBtn.textContent = sidebar.classList.contains("closed") ? "☰" : "✕";
 }
 
-function logout() {
-    window.location.replace('http://localhost/BotoPH/login.php');
+async function logout() {
+    try {
+        const response = await fetch('../api/logout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        const data = await response.json();
+        alert(data.message);
+        window.location.href = '../login.php';
+    } catch (err) {
+        console.error('Logout failed:', err);
+    }
 }
 
 // sidebar.js
