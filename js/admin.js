@@ -46,6 +46,7 @@ async function renderCandidates() {
             <p><strong>Running:</strong> ${c.position}</p>
             <p><strong>Party:</strong> ${c.party}</p>
             <p>${c.platform}</p>
+            <p>dbID: ${c.id}</p>
             <div class="card-actions">
                 <button onclick="editCandidate(${c.id})">Edit</button>
                 <button onclick="editPage(${c.id})" style="background:#00aa00;">Page</button>
@@ -72,7 +73,7 @@ async function deleteCandidate(id) {
 }
 
 function editPage(id) {
-    window.location.href = "editor.html";
+    window.location.href = `editor.html?id=${id}`;
 }
 
 // modal.classList.remove('hidden')
@@ -109,8 +110,7 @@ form.addEventListener("submit", async (e) => {
             closeModal(); // close the form
         } else {
             alert("Error updating candidate.");
-        }    // const index = candidates.findIndex(c => c.id == editingId);
-    // candidates[index] = newCandidate;
+        }   
     } else {
         console.log("Sending form data...");
         for (let [key, value] of formData.entries()) {
