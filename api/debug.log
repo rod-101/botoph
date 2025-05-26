@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748085550517
-    [fname] => Kiko
-    [lname] => Pangilinan
-    [position] => Senator 
-    [party] => Liberal Party 
-    [platform] => Agricultural development. Food security. Farmer and fisherfolk welfare. Anti-corruption. Good governance
+    [candidate_id] => 1748256854723
+    [fname] => Maria
+    [lname] => Ibarra
+    [position] => Treasurer
+    [party] => Partido Pilipinoooi
+    [platform] => wala
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => kiko.jpg
-            [full_path] => kiko.jpg
+            [name] => me.jpg
+            [full_path] => me.jpg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\phpB685.tmp
+            [tmp_name] => C:\xampp\tmp\php8A2D.tmp
             [error] => 0
-            [size] => 100330
+            [size] => 32339
         )
 
 )

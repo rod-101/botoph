@@ -145,14 +145,14 @@
       console.log("Content HTML:\n", contentHTML);
 
       alert("Candidate profile ready to be submitted. (Check console log)");
-      let response = await fetch('', {
+      let response = await fetch('../api/submit_profile.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             candidateId,
-            fullname,
+            fullName,
             runningFor,
             partyList,
             contentHTML
