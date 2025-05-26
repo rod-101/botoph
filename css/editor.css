@@ -108,28 +108,41 @@ input[type="text"]:focus {
     margin: 0.5rem 0;
     border-radius: 4px;
 }
-
-.submit-btn {
+.btn {
     display: block;
     width: 100%;
     padding: 12px;
     margin-top: 1.5rem;
-    background: var(--primary);
-    color: white;
     border: none;
     border-radius: 6px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.submit-btn:hover {
-    background: #005a9e;
+/* Save button (blue background, white text) */
+.btn.save {
+    background: var(--primary);
+    color: white;
 }
 
-#imageUploader {
-    display: none;
+.btn.save:hover {
+    background: #005a9e; /* darker blue */
+}
+
+/* Cancel button (white background, blue text) */
+.btn.cancel {
+    background: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    box-shadow: 0 2px 6px rgba(0, 120, 212, 0.3);
+}
+
+.btn.cancel:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.5);
 }
 
 #contentField {

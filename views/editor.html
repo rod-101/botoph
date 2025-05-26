@@ -36,7 +36,8 @@
 
     <textarea name="content" id="contentField"></textarea>
 
-    <button type="submit" class="submit-btn">Save Profile</button>
+    <button type="submit" class="btn save">Save Profile</button>
+    <button type="button" class="btn cancel" id="cancel">Cancel</button>
   </form>
 
   <script>
@@ -90,6 +91,14 @@
             alert("Failed to load candidate profile.");
         }
     });
+
+    document.getElementById('cancel').addEventListener('click', () => {
+        let b = confirm("Going back means losing the current content. \nAre you sure you want to go back?");
+        if(b) {
+            document.getElementById('profileForm').reset();
+            window.history.back();
+        }
+    })
 
     function format(command, value = null) {
       if (command === 'formatBlock' && value === 'H2') {
