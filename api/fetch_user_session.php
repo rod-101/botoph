@@ -1,18 +1,19 @@
 <?php
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-
 session_start();
+header('Content-Type: application/json');
 
-$response = [
-    'fullname'   => $_SESSION['fullname']   ?? 'Unauthorized',
-    'email'      => $_SESSION['email']      ?? 'unauthorized@access.com',
-    'isLoggedIn' => $_SESSION['isLoggedIn'] ?? false,
-    'role'       => $_SESSION['role']       ?? null
-];
+if (!isset($_SESSION['isLoggedIn']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode([
+        'isLoggedIn' => false,
+        'redirect' => '../views/unauthorized.html'
+    ]);
+    exit;
+}
 
-echo json_encode($response);
-exit;
-
+echo json_encode([
+    'fullname' => $_SESSION['fullname'] ?? 'Guest',
+    'email' => $_SESSION['email'] ?? 'guest@gmail.com',
+    'isLoggedIn' => true,
+    'role' => $_SESSION['role']
+]);
 ?>

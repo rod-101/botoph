@@ -24,11 +24,11 @@ async function logout() {
 
 // sidebar.js
 export async function loadSidebar(containerId) {
-    let fullname = 'Unauthorized';
-    let email = 'unauthorized@access.com';
-
+    let fullname = 'Unauthorized'
+    let email = 'unauthorized@access.com'
     try {
         const response = await fetch('../api/fetch_user_session.php');
+        console.log('after fetch')
         const data = await response.json();
         fullname = data.fullname;
         email = data.email;

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="../css/sidebar.css">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/adminDashboard.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/adminDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="module">
+        import { loadSidebar } from '../js/sidebar.js';
+        import { authCheckOnPageRestore, checkSessionAndRedirect } from '../js/auth.js'
+
+        checkSessionAndRedirect();
+        authCheckOnPageRestore();
+        loadSidebar('sidebar-container');
+    </script>
   <style>
     
     body {
@@ -55,38 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/chart.js"></script>
 
-    <script type="module">
-        import { loadSidebar } from '../js/sidebar.js';
-        loadSidebar('sidebar-container');
-    </script>
+    
 
     <script>
-        window.onpageshow = function (event) {
-            if (event.persisted) {
-                // console.log('event persisted or back button was clicked')
-                checkSessionAndRedirect();
-                // forces reload if the page was loaded from bfcache
-            }
-        };
-
-        // checkSessionAndRedirect();
-
-        async function checkSessionAndRedirect() {
-            try {
-                const response = await fetch('../api/fetch_user_session.php', { cache: 'no-store' });
-                const data = await response.json();
-                const isLoggedIn = data.isLoggedIn;
-                const role = data.role;
-                console.log(role + " " + isLoggedIn);
-
-                if (!isLoggedIn || role !== 'admin') {
-                    console.log("user is not authenticated.");
-                    window.location.href = '../login.php';
-                }
-            } catch (error) {
-                console.error('Failed to fetch session info:', error);
-            }
-        }
 
         document.addEventListener("DOMContentLoaded", function () {
         // Load user counts

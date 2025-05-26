@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unauthorized Access</title>
+  <style>
+    body {
+      background-color: #f8d7da;
+      color: #721c24;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .error-box {
+      background-color: #f5c6cb;
+      border: 1px solid #f5c2c7;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      background-color: #721c24;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #501518;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-box">
+    <h1>Unauthorized Access</h1>
+    <p>You do not have permission to view this page.</p>
+    <button onclick="window.location.href='../login.php'">Go Back to Login</button>
+  </div>
+</body>
+</html>
