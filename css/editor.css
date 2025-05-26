@@ -1,0 +1,157 @@
+:root {
+    --primary: #0078d4;
+    --text: #222;
+    --bg: #f9f9f9;
+    --input-bg: #fff;
+    --border: #ccc;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 2rem auto;
+    max-width: 760px;
+    background: var(--bg);
+    color: var(--text);
+    padding: 0 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+    margin-top: 1rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--input-bg);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0.5rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px 6px 0 0;
+    margin-top: 1rem;
+}
+
+.toolbar button {
+    flex: 1 1 auto;
+    min-width: 40px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: var(--text);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.toolbar button:hover {
+    background: #e0e0e0;
+}
+
+#editor {
+    min-height: 350px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    background: var(--input-bg);
+    font-size: 1rem;
+    line-height: 1.6;
+    outline: none;
+}
+
+#editor h2 {
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+}
+
+#editor ul,
+#editor ol {
+    padding-left: 1.2rem;
+}
+
+#editor a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+#editor img {
+    max-width: 100%;
+    height: auto;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #005a9e;
+}
+
+#imageUploader {
+    display: none;
+}
+
+#contentField {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    h1 {
+    font-size: 1.5rem;
+    }
+
+    .toolbar button {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+    }
+
+    #editor {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+    }
+
+    .submit-btn {
+    font-size: 0.95rem;
+    }
+}

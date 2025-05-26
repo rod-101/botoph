@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Candidate Profile Creation - BotoPH</title>
+  <link rel="stylesheet" href="../css/editor.css">
+</head>
+<body>
+  <h1>Create Candidate Profile</h1>
+
+  <form id="profileForm" onsubmit="submitForm(event)">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" placeholder="Juan Dela Cruz" required />
+
+    <label for="runningFor">Running For</label>
+    <input type="text" id="runningFor" name="runningFor" placeholder="Position" required />
+
+    <label for="partyList">Partylist</label>
+    <input type="text" id="partyList" name="partyList" placeholder="Partylist Name" required />
+
+    <div class="toolbar" role="toolbar" aria-label="Formatting options">
+      <button type="button" onclick="format('bold')"><b>B</b></button>
+      <button type="button" onclick="format('italic')"><i>I</i></button>
+      <button type="button" onclick="format('underline')"><u>U</u></button>
+      <button type="button" onclick="format('insertOrderedList')">1.</button>
+      <button type="button" onclick="format('insertUnorderedList')">&bull;</button>
+      <button type="button" onclick="format('formatBlock','H2')">H2</button>
+      <button type="button" onclick="insertHorizontalLine()">―</button>
+      <button type="button" onclick="createLink()">🔗</button>
+      <button type="button" onclick="triggerImageUpload()">🖼️</button>
+    </div>
+
+    <input type="file" id="imageUploader" accept="image/*" onchange="insertImage(event)" />
+
+    <div id="editor" contenteditable="true" aria-label="Rich text editor" spellcheck="true">
+      <h2>📜 Background</h2>
+      <p>Write background here...</p>
+
+      <h2>🎯 Platform</h2>
+      <ul>
+        <li>Education: Free college tuition</li>
+        <li>Healthcare: Universal access</li>
+      </ul>
+
+      <h2>📊 Track Record</h2>
+      <ul>
+        <li>✅ Passed: Anti-Corruption Bill</li>
+        <li>❌ Voted against: Internet Tax Bill</li>
+      </ul>
+
+      <h2>📚 References</h2>
+      <ul>
+        <li>COMELEC Profile [link]</li>
+        <li>Interview with XYZ [link]</li>
+      </ul>
+    </div>
+
+    <textarea name="content" id="contentField"></textarea>
+
+    <button type="submit" class="submit-btn">Save Profile</button>
+  </form>
+
+  <script>
+    function format(command, value = null) {
+      if (command === 'formatBlock' && value === 'H2') {
+        toggleHeading('H2');
+      } else {
+        document.execCommand(command, false, value);
+        document.getElementById("editor").focus();
+      }
+    }
+
+    function toggleHeading(tag) {
+      const selection = window.getSelection();
+      if (!selection.rangeCount) return;
+      const range = selection.getRangeAt(0);
+      let container = range.startContainer;
+      while (container && container.nodeType !== 1) {
+        container = container.parentNode;
+      }
+
+      if (!container) return;
+
+      if (container.tagName === tag.toUpperCase()) {
+        document.execCommand('formatBlock', false, 'p');
+      } else {
+        document.execCommand('formatBlock', false, tag);
+      }
+      document.getElementById("editor").focus();
+    }
+
+    function insertHorizontalLine() {
+      document.execCommand('insertHorizontalRule', false, null);
+      document.getElementById("editor").focus();
+    }
+
+    function createLink() {
+      let url = prompt("Enter the URL", "https://");
+      if (url) {
+        if (!url.match(/^https?:\/\//)) {
+          alert("URL must start with http:// or https://");
+          return;
+        }
+        format('createLink', url);
+      }
+    }
+
+    function triggerImageUpload() {
+      document.getElementById("imageUploader").click();
+    }
+
+    function insertImage(event) {
+      const file = event.target.files[0];
+      if (!file || !file.type.startsWith('image/')) {
+        alert("Please choose a valid image file.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        format('insertImage', e.target.result);
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("fullName").value.trim();
+      const runningFor = document.getElementById("runningFor").value.trim();
+      const partyList = document.getElementById("partyList").value.trim();
+      const contentHTML = document.getElementById("editor").innerHTML.trim();
+
+      if (!fullName || !runningFor || !partyList) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      if (!contentHTML) {
+        alert("Please write the candidate profile content.");
+        return;
+      }
+
+      document.getElementById("contentField").value = contentHTML;
+
+      console.log("Full Name:", fullName);
+      console.log("Running For:", runningFor);
+      console.log("Partylist:", partyList);
+      console.log("Content HTML:\n", contentHTML);
+
+      alert("Candidate profile ready to be submitted. (Check console log)");
+      // Place your backend submission logic here
+    }
+  </script>
+</body>
+</html>

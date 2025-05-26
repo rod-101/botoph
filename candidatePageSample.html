@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Candidate Profile - Juan Dela Cruz</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #f7f7f7;      /* soft light gray background */
+  color: #2e2e2e;           /* dark gray text, softer than pure black */
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #ffffff;      /* white card background */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+a {
+  color: #1a73e8;           /* vivid but pleasant blue */
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+section h2 {
+  color: #1a73e8;           /* matching section heading color */
+}
+
+  
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  .header img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0366d6;
+  }
+  .header-info {
+    flex-grow: 1;
+  }
+  .header-info h1 {
+    margin: 0 0 0.2rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  .header-info p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  /* Sections */
+  section {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  section:last-child {
+    border-bottom: none;
+  }
+ 
+
+  /* List styles */
+  ul {
+    padding-left: 1.2rem;
+    margin-top: 0;
+  }
+  ul li {
+    margin-bottom: 0.4rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+    .header img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
+      border-width: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Juan Dela Cruz" />
+    <div class="header-info">
+      <h1>Juan Dela Cruz</h1>
+      <p><em>Presidential Candidate</em></p>
+      <p><strong>Partido Pilipino</strong></p>
+    </div>
+  </header>
+
+  <section>
+    <h2>📜 Background</h2>
+    <p>Former mayor of Manila, lawyer, Ateneo de Manila University graduate with 15 years of public service experience.</p>
+  </section>
+
+  <section>
+    <h2>🎯 Platform</h2>
+    <ul>
+      <li>Education: Free public university tuition nationwide</li>
+      <li>Economy: Tax incentives for MSMEs to boost local businesses</li>
+      <li>Healthcare: Universal healthcare coverage with improved rural access</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📊 Track Record</h2>
+    <ul>
+      <li>✅ Authored: Anti-Corruption Bill 2022</li>
+      <li>✅ Sponsored: Affordable Housing Act 2021</li>
+      <li>❌ Voted against: Renewable Energy Bill 2023 (due to sustainability concerns)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📚 References</h2>
+    <ul>
+      <li><a href="https://comelec.gov.ph/candidate-profile" target="_blank" rel="noopener">COMELEC Profile</a></li>
+      <li><a href="https://rappler.com/interview/juan-dela-cruz" target="_blank" rel="noopener">Rappler Interview</a></li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
