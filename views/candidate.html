@@ -12,6 +12,22 @@
       margin: 0;
       padding: 2rem;
     }
+    .back-button {
+      display: inline-block;
+      position: fixed;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #c3d2e7;
+      color: #1a202c;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s ease;
+    }
+    .back-button:hover {
+      background-color: #cbd5e0;
+    }
     .profile-container {
       max-width: 800px;
       margin: auto;
@@ -35,9 +51,11 @@
 </head>
 <body>
 
-<div class="profile-container" id="profile">
-  <p>Loading profile...</p>
-</div>
+    <button class="back-button" onclick="history.back()">← Back</button>
+
+    <div class="profile-container" id="profile">
+    <p>Loading profile...</p>
+    </div>
 
 <script>
   // Get ID from URL
