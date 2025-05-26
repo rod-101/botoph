@@ -10,7 +10,7 @@ $candidateId = intval($data['candidateId'] ?? 0);
 $fullName = trim($data['fullName'] ?? '');
 $runningFor = trim($data['runningFor'] ?? '');
 $partyList = trim($data['partyList'] ?? '');
-$content = trim($data['contentHTML'] ?? '');
+$content = trim($data['contentField'] ?? '');
 
 if (!$candidateId || !$fullName || !$runningFor || !$partyList || !$content) {
     http_response_code(400);
@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
     $stmt = $conn->prepare("UPDATE candidate_profiles 
                             SET full_name = ?, running_for = ?, party_list = ?, content = ? 
                             WHERE candidate_id = ?");
-    $stmt->bind_param("ssssi", $fullName, $runningFor, $partyList, $content, $id);
+    $stmt->bind_param("ssssi", $fullName, $runningFor, $partyList, $content, $candidateId);
     $action = "updated";
 } else {
     // INSERT
@@ -45,7 +45,7 @@ if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
         "message" => "Profile $action.",
-        "profile_id" => $action === "created" ? $stmt->insert_id : $candidateId
+        "candidate_id" => $action === "created" ? $stmt->insert_id : $candidateId
     ]);
 } else {
     http_response_code(500);

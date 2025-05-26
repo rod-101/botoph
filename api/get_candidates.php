@@ -13,7 +13,7 @@ function utf8ize($mixed) {
     return $mixed;
 }
 
-$sql = "SELECT candidate_id, first_name, last_name, CONCAT(first_name, ' ', last_name) AS fullname, position, party, platform, photo_url, page_url FROM candidates;";
+$sql = "SELECT candidate_id, first_name, last_name, CONCAT(first_name, ' ', last_name) AS fullname, position, party, platform, photo_url FROM candidates;";
 $result = $conn->query($sql);
 
 $response = [];
@@ -28,8 +28,7 @@ if ($result && $result->num_rows > 0) {
             'position' => $row['position'],
             'party' => $row['party'],
             'platform' => $row['platform'],
-            'photoUrl' => $row['photo_url'],
-            'pageUrl' => $row['page_url']
+            'photoUrl' => $row['photo_url']
         ];
     }
 } else {
