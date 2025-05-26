@@ -119,11 +119,13 @@
     }
 
     async function submitForm(e) {
-      e.preventDefault();
-      const fullName = document.getElementById("fullName").value.trim();
-      const runningFor = document.getElementById("runningFor").value.trim();
-      const partyList = document.getElementById("partyList").value.trim();
-      const contentHTML = document.getElementById("editor").innerHTML.trim();
+        e.preventDefault();
+        const fullName = document.getElementById("fullName").value.trim();
+        const runningFor = document.getElementById("runningFor").value.trim();
+        const partyList = document.getElementById("partyList").value.trim();
+        const contentHTML = document.getElementById("editor").innerHTML.trim();
+        const urlParams = new URLSearchParams(window.location.search);
+        const candidateId = urlParams.get('id');
 
       if (!fullName || !runningFor || !partyList) {
         alert("Please fill in all required fields.");
@@ -149,6 +151,7 @@
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            candidateId,
             fullname,
             runningFor,
             partyList,
