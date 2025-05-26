@@ -48,6 +48,7 @@ async function renderCandidates() {
             <p>${c.platform}</p>
             <div class="card-actions">
                 <button onclick="editCandidate(${c.id})">Edit</button>
+                <button onclick="editPage(${c.id})" style="background:#00aa00;">Page</button>
                 <button onclick="deleteCandidate(${c.id})" style="background:#dd0000;">Delete</button>
             </div>
         `;
@@ -68,6 +69,10 @@ async function deleteCandidate(id) {
         })
         await renderCandidates();
     }
+}
+
+function editPage(id) {
+    window.location.href = "editor.html";
 }
 
 // modal.classList.remove('hidden')
