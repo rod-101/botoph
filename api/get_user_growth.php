@@ -2,21 +2,39 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-$host = 'sql200.infinityfree.com';
-$username = 'if0_39059735';
-$password = '2G0o1rxhBKAmt1';
-$dbname = 'if0_39059735_botoph';
 $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+$remote = [
+    'host' => 'sql200.infinityfree.com',
+    'username' => 'if0_39059735',
+    'password' => '2G0o1rxhBKAmt1',
+    'dbname' => 'if0_39059735_botoph'
+];
+$local = [
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'dbname' => 'botoph'
+];
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
 
+try {
+    $dsn = "mysql:host={$local['host']};dbname={$local['dbname']};charset=$charset";
+    $pdo = new PDO($dsn, $local['username'], $local['password'], $options);
+} catch(PDOException $e) {
+    try {
+        $dsn = "mysql:host={$remote['host']};dbname={$remote['dbname']};charset=$charset";
+        $pdo = new PDO($dsn, $remote['username'], $remote['password'], $options);
+    } catch(PDOException $e1) {
+        echo json_encode(['error' => $e1.getMessage()]);
+    }
+}
+
+try {
     // Get the type from the URL (default to 'daily')
     $type = $_GET['type'] ?? 'daily';
 
