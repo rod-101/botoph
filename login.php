@@ -2,9 +2,8 @@
     include 'backend/dbConnection.php';
     session_start();
 
-    // use this key for auth 58a520c2f866ddbe25294f86ea9c90c5
-
     $showModal = false;
+    $error = "";
 
     if (isset($_SESSION['registration_success']) && $_SESSION['registration_success'] === true) {
         $showModal = true;
@@ -56,11 +55,11 @@
                     }
                 } else {
                     // Invalid password
-                    echo "Invalid email or password.";
+                    $error = "Invalid email or password.";
                 }
             } else {
                 // Email does not exist
-                echo "Invalid email or password.";
+                $error = "Invalid email or password.";
             }
             
             $stmt->close();
@@ -125,10 +124,15 @@
                         <h5 class="mb-3">Log in</h5>
                         <form method="POST">
                             <div class="mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email address" required>
+                                <?php if (!empty($error)): ?>
+                                    <div class="alert alert-danger text-center py-2">
+                                        <?= htmlspecialchars($error) ?>
+                                    </div>
+                                <?php endif; ?>
+                                <input type="email" name="email" class="form-control" placeholder="Email address" required>
                             </div>
                             <div class="mb-3">
-                            <input type="password" name="pass" class="form-control" placeholder="Password" required>
+                                <input type="password" name="pass" class="form-control" placeholder="Password" required>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>

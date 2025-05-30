@@ -5,7 +5,7 @@ document.getElementById('dailyTab').classList.remove('active');
 document.getElementById('weeklyTab').classList.remove('active');
 document.getElementById(type + 'Tab').classList.add('active');
 
-fetch(`http://localhost/botoph/api/get_user_growth.php?type=${type}`)
+fetch(`../api/get_user_growth.php?type=${type}`)
     .then(res => res.json())
     .then(data => {
     const ctx = document.getElementById('growthChart').getContext('2d');

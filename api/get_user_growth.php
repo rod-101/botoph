@@ -2,20 +2,20 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-$host = 'localhost';
-$db   = 'botoph';
-$user = 'root';
-$pass = '';
+$host = 'sql200.infinityfree.com';
+$username = 'if0_39059735';
+$password = '2G0o1rxhBKAmt1';
+$dbname = 'if0_39059735_botoph';
 $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO($dsn, $username, $password, $options);
 
     // Get the type from the URL (default to 'daily')
     $type = $_GET['type'] ?? 'daily';

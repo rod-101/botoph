@@ -25,5 +25,7 @@ $profile = $result->fetch_assoc();
 // $profile['content'] = nl2br(htmlspecialchars($profile['content']));
 echo json_encode($profile);
 
+
+
 $stmt->close();
 $conn->close();

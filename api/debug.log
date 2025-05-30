@@ -1,22 +1,22 @@
 Array
 (
-    [candidate_id] => 1748297634157
-    [fname] => Willie
-    [lname] => Revillame
-    [position] => Senator
-    [party] => 
-    [platform] => 
+    [candidate_id] => 1748351059860
+    [fname] => Robin
+    [lname] => Padilla
+    [position] => Tuta ni Duterte
+    [party] => PDP - Laban
+    [platform] => “SEEEEEEEEX”
 )
 Array
 (
     [photoUpload] => Array
         (
-            [name] => dwar-abante-radyo-willie-revillame.jpg
-            [full_path] => dwar-abante-radyo-willie-revillame.jpg
+            [name] => IMG_7306.jpeg
+            [full_path] => IMG_7306.jpeg
             [type] => image/jpeg
-            [tmp_name] => C:\xampp\tmp\phpC8EE.tmp
+            [tmp_name] => /tmp/phpEBPkBs
             [error] => 0
-            [size] => 192844
+            [size] => 73816
         )
 
 )
