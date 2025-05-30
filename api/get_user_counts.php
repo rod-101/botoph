@@ -5,22 +5,40 @@
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *'); // Adjust this for production security
 
-    // Database connection
-$host = 'sql200.infinityfree.com';
-$username = 'if0_39059735';
-$password = '2G0o1rxhBKAmt1';
-$dbname = 'if0_39059735_botoph';
-$charset = 'utf8mb4';
+    $charset = 'utf8mb4';
 
-    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ];
+// Database connection
+$remote = [
+    'host' => 'sql200.infinityfree.com',
+    'username' => 'if0_39059735',
+    'password' => '2G0o1rxhBKAmt1',
+    'dbname' => 'if0_39059735_botoph'
+];
+$local = [
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'dbname' => 'botoph',
+];
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
 
     try {
-        $pdo = new PDO($dsn, $username, $password, $options);
+        $dsn = "mysql:host={$local['host']};dbname={$local['dbname']};charset=$charset";
+        $pdo = new PDO($dsn, $local['username'], $local['password'], $options);
+    } catch (PDOException $e) {
+        try {
+            $dsn = "mysql:host={$remote['host']};dbname={$remote['dbname']};charset=$charset";
+            $pdo = new PDO($dsn, $remote['username'], $remote['password'], $options);
+        } catch (PDOException $e2) {
+            echo json_encode(['error' => $e2->getMessage()]);
+        }
+    }
 
+    try{
         // Get total users
         $stmt = $pdo->query("SELECT COUNT(*) AS total FROM users");
         $total = $stmt->fetch()['total'];
@@ -36,8 +54,7 @@ $charset = 'utf8mb4';
         }
 
         echo json_encode($counts);
-
-    } catch (\PDOException $e) {
-        echo json_encode(['error' => $e->getMessage()]);
+    } catch (PDOException $queryException) {
+        echo json_encode(['error' => $queryException.getMessage()]);
     }
 ?>
