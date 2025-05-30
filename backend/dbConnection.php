@@ -12,7 +12,7 @@ $password = '2G0o1rxhBKAmt1';
 $dbname = 'if0_39059735_botoph';
 
 //try local connection
-$conn = new mysql($localHost, $localUsername, $localPassword, $localDbname);
+$conn = new mysqli($localHost, $localUsername, $localPassword, $localDbname);
 
 if($conn->connect_error) {
     
@@ -21,9 +21,6 @@ if($conn->connect_error) {
     if($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-} else {
-    echo "Connect to local server";
 }
-
 $conn->set_charset("utf8mb4");
 ?>
