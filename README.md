@@ -1,4 +1,4 @@
-## I created an educational platform for Filipino voters.
+## In response to widespread uninformed voting in the Philippines, I created a simple educational platform for Filipino voters.
 
 ### The user (voter) can:
 1. create an account.
@@ -16,5 +16,6 @@
 7. edit a user's account
 
 ### Suggestions:
-1. allow commenting on each candidate page
-2. add moderators
+1. allow commenting on each candidate page.
+2. add moderators.
+3. create a mock voting feature for all, listed candidates.
