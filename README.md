@@ -1,4 +1,4 @@
-## In response to widespread uninformed voting in the Philippines, I created a simple educational platform for Filipino voters.
+## In response to widespread uninformed voting in the Philippines, I created a simple educational platform for Filipino voters using.
 
 ### The user (voter) can:
 1. create an account.
@@ -14,6 +14,10 @@
 5. delete candidate
 6. disable a user's account (unfinished)
 7. edit a user's account
+
+Notes:
+1. The app uses xampp.
+2. Import the db scheme in the 'backend' folder.
 
 ### Suggestions:
 1. allow commenting on each candidate page.
