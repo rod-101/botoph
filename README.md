@@ -14,3 +14,7 @@
 5. delete candidate
 6. disable a user's account (unfinished)
 7. edit a user's account
+
+### Suggestions:
+1. allow commenting on each candidate page
+2. add moderators
